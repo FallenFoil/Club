@@ -1,5 +1,3 @@
-package model;
-
 import java.util.Map;
 import java.util.HashMap;
 import java.time.LocalDate;
@@ -23,27 +21,35 @@ public class Member{
 		setPayments(otherMember.getPayments());
 	}
 
+	//Getters!!
 	public String getName(){
 		return this.name;
 	}
 
 	public Map<LocalDate, Double> getPayments(){
+
 		Map<LocalDate, Double> result = new HashMap<>();
-		for(Map.Entry<LocalDate, Double> entry : this.payments.entryset()){
+
+		for(Map.Entry<LocalDate, Double> entry : this.payments.entrySet()){
 			result.put(entry.getKey(), entry.getValue());
 		}
 		return result;
 	}
 
+	//Setters!
 	public void setName(String name){
 		this.name = name;
 	}
 
 	public void setPayments(Map<LocalDate, Double> map){
 		this.payments = new HashMap<>();
-		for(Map.Entry<LocalDate, Double> entry : map.entryset()){
+		for(Map.Entry<LocalDate, Double> entry : map.entrySet()){
 			this.payments.put(entry.getKey(), entry.getValue());
 		}
+	}
+
+	public Member clone(){
+		return new Member(this);
 	}
 
 	public boolean equals(Object obj){
@@ -52,7 +58,7 @@ public class Member{
 
 		Member m = (Member) obj;
 
-		return this.getName().equals(m.getname()) && this.getPayments().equals(m.getPayments());
+		return (this.getName().equals(m.getName()) && this.getPayments().equals(m.getPayments()));
 	}
 
 	public String toString(){
@@ -64,7 +70,4 @@ public class Member{
 		return sb.toString();
 	}
 
-	public Member clone(){
-		return new Member(this)
-	}
 }
