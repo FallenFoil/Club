@@ -14,47 +14,32 @@ public class Club{
 		return ourInstance;
 	}
 
-	public List<String> members;
-	public Map<String,Map<LocalDate,Double>> payments;
+	public Map<Member,List<Fee>> info;
 
 	public Club(){
-		this.members = new ArrayList<>();
-		this.payments = new HashMap<>();
+		this.info = new HashMap<>();
 	}
 	
-	public Club(List<String> x , Map<String,Map<LocalDate,Double>> y){
-		setMembers(x);
-		setPayments(y);
+	public Club(Map<Member,List<Fee>> x){
+		setInfo(x);
 	}
 
 	public Club(Club x){
 		try {
-			this.members = x.getMembers();
-			this.payments = x.getPayments();
+			this.info = x.getInfo();
 		}catch (Exception e){
-			this.members = new ArrayList<>();
+			this.info = new HashMap<>();
 		}
 	}
 
 
 	//Getters!
-	public List<String> getMembers() throws EmptyListException{
 
-		List<String> result = new ArrayList<>();
+	public Map<Member,List<Fee>> getInfo(){
 
-		if(this.members.size() == 0) throw new EmptyListException("Nenhum membro associado ao Cesium.");
-		for (String m : this.members) {
-				result.add(m);
-			}
+		Map<Member,List<Fee>> result = new HashMap<>();
 
-		return result;
-	}
-
-	public Map<String,Map<LocalDate,Double>> getPayments(){
-
-		Map<String,Map<LocalDate,Double>> result = new HashMap<>();
-
-		for(Map.Entry<String ,Map<LocalDate, Double>> entry : this.payments.entrySet()){
+		for(Map.Entry<Member ,List<Fee>> entry : this.info.entrySet()){
 
 			result.put(entry.getKey(), entry.getValue());
 		}
@@ -63,17 +48,10 @@ public class Club{
 
 
 	//Setters!
-	public void setMembers(List<String> x){
-		this.members = new ArrayList<>();
-		for(String m : x){
-			this.members.add(m);
-		}
-	}
-
-	public void setPayments(Map<String,Map<LocalDate,Double>> x){
-		this.payments = new HashMap<>();
-		for(Map.Entry<String,Map<LocalDate, Double>> entry : x.entrySet()){
-			this.payments.put(entry.getKey(), entry.getValue());
+	public void setInfo(Map<Member,List<Fee>> x){
+		this.info = new HashMap<>();
+		for(Map.Entry<Member,List<Fee>> entry : x.entrySet()){
+			this.info.put(entry.getKey(), entry.getValue());
 		}
 	}
 
@@ -87,12 +65,8 @@ public class Club{
 
 		boolean r;
 
-		try{
-			r = this.members.equals(c.getMembers());
-		}catch (Exception e){
-			r = false;
-		}
-		return r;
+		return this.info.equals(c.getInfo());
+
 	}
 
 
@@ -102,25 +76,22 @@ public class Club{
 
 	public String toString(){
 		StringBuilder sb = new StringBuilder("Club:\n");
-		sb.append("List of Members:\n").append(this.members);
+		sb.append("List of Members:\n").append(this.info);
 
 		return sb.toString();
 	}
 
-	public boolean AddMember(String x) {
-		if (!this.members.contains(x)) {
-			this.members.add(x);
+	public boolean AddMember(Member x) {
+		if (!this.info.containsKey(x)) {
+			this.info.put(x,new ArrayList<>());
 			return true;
 		}
 		return false;
 	}
 
-	public void RemoveMember(String x){
-		if(this.members.contains(x)){
-			this.members.remove(x);
-		}
-		if(this.payments.containsKey(x)){
-			this.payments.remove(x);
+	public void removeMember(String x){
+		if(this.info.containsKey(x)){
+			this.info.remove(x);
 		}
 	}
 }

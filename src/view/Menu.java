@@ -18,7 +18,7 @@ public class Menu {
 
 
     public Menu() {
-        this.cesium = new Club();
+        this.cesium = Club.getInstance();
         JFrame menu = new JFrame("App Cesium");
 
         my_panel.setSize(1000,1000);
@@ -29,25 +29,46 @@ public class Menu {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try{
-                    new Membros(cesium.getMembers()); //tem Exception defenido
+                    new Membros(cesium.getInfo()); //tem Exception defenido
                 }catch (Exception l){
                     System.out.println(l);
                 };
             }
         });
 
-        adicionarMembroButton.addActionListener(new ActionListener() {
+        eliminarMembroButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JFrame m = new JFrame("Novo Membro");
+                JFrame m = new JFrame("Eliminar membro");
                 m.setResizable(false);
-                m.setSize(200,50);
+                m.setSize(200, 50);
 
                 JTextField new_member = new JTextField(10);
                 new_member.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        cesium.AddMember(new_member.getText());
+                        //ESTOU A ASSUMIR QUE O ID É SEMPRE O , MUDAR ISTO DEPOIS
+                        cesium.removeMember(new_member.getText());
+                    }
+                });
+
+            }
+        });
+
+
+        adicionarMembroButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame m = new JFrame("Novo Membro");
+                m.setResizable(false);
+                m.setSize(200, 50);
+
+                JTextField new_member = new JTextField(10);
+                new_member.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        //ESTOU A ASSUMIR QUE O ID É SEMPRE O , MUDAR ISTO DEPOIS
+                        cesium.AddMember(new Member(new_member.getText(), 0));
                     }
                 });
 
@@ -57,9 +78,9 @@ public class Menu {
             }
         });
 
-        menu.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        menu.pack();
-        menu.setVisible(true);
+                menu.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+                menu.pack();
+                menu.setVisible(true);
 
     }
 
