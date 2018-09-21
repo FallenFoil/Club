@@ -8,6 +8,12 @@ import java.util.Map;
 
 public class Club{
 
+	private static Club ourInstance = new Club();
+
+	public static Club getInstance() {
+		return ourInstance;
+	}
+
 	public List<String> members;
 	public Map<String,Map<LocalDate,Double>> payments;
 
