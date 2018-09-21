@@ -1,3 +1,5 @@
+package model;
+
 public class SameMemberException extends Exception{
 
     public SameMemberException(){

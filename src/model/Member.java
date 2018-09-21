@@ -29,7 +29,7 @@ public class Member{
 
 	public Map<LocalDate, Double> getPayments(){
 		Map<LocalDate, Double> result = new HashMap<>();
-		for(Map.Entry<LocalDate, Double> entry : this.payments.entryset()){
+		for(Map.Entry<LocalDate, Double> entry : this.payments.entrySet()){
 			result.put(entry.getKey(), entry.getValue());
 		}
 		return result;
@@ -41,7 +41,7 @@ public class Member{
 
 	public void setPayments(Map<LocalDate, Double> map){
 		this.payments = new HashMap<>();
-		for(Map.Entry<LocalDate, Double> entry : map.entryset()){
+		for(Map.Entry<LocalDate, Double> entry : map.entrySet()){
 			this.payments.put(entry.getKey(), entry.getValue());
 		}
 	}
@@ -52,7 +52,7 @@ public class Member{
 
 		Member m = (Member) obj;
 
-		return this.getName().equals(m.getname()) && this.getPayments().equals(m.getPayments());
+		return this.getName().equals(m.getName()) && this.getPayments().equals(m.getPayments());
 	}
 
 	public String toString(){
@@ -65,6 +65,6 @@ public class Member{
 	}
 
 	public Member clone(){
-		return new Member(this)
+		return new Member(this);
 	}
 }
