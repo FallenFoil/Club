@@ -3,15 +3,16 @@ package view;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import model.*;
 
 public class Menu {
 
     private Club cesium;
-    private JPanel my_panel;
-    private JButton listaDeMembrosButton;
-    private JButton adicionarMembrosButton;
-    private JButton eliminarMembrosButton;
-    private JButton justForFunButton;
+    private JPanel my_panel = new JPanel();
+    private JButton listaDeMembrosButton = new JButton();
+    private JButton adicionarMembrosButton = new JButton();
+    private JButton eliminarMembrosButton = new JButton();
+    private JButton justForFunButton = new JButton();
 
 
 
