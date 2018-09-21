@@ -5,46 +5,37 @@ import java.util.HashMap;
 import java.time.LocalDate;
 
 public class Member{
-	public String name;
-	public Map<LocalDate, Double> payments;
+
+	private int ID;
+	private	String name;
 
 	public Member(){
 		this.name = "n/a";
-		this.payments = new HashMap<>();
+		this.ID = 0;
 	}
 
-	public Member(String name, Map<LocalDate, Double> payments){
+	public Member(String name,int id){
 		this.name = name;
-		setPayments(payments);
+		this.ID = id;
 	}
 	
-	public Member(Member otherMember){
-		this.name = otherMember.getName();
-		setPayments(otherMember.getPayments());
+	public Member(Member x){
+		this.name = x.getName();
+		this.ID = x.getID();
 	}
 
 	public String getName(){
 		return this.name;
 	}
 
-	public Map<LocalDate, Double> getPayments(){
-		Map<LocalDate, Double> result = new HashMap<>();
-		for(Map.Entry<LocalDate, Double> entry : this.payments.entrySet()){
-			result.put(entry.getKey(), entry.getValue());
-		}
-		return result;
+	public int getID(){
+		return this.ID;
 	}
 
 	public void setName(String name){
 		this.name = name;
 	}
 
-	public void setPayments(Map<LocalDate, Double> map){
-		this.payments = new HashMap<>();
-		for(Map.Entry<LocalDate, Double> entry : map.entrySet()){
-			this.payments.put(entry.getKey(), entry.getValue());
-		}
-	}
 
 	public boolean equals(Object obj){
 		if(obj == this){return true;}
@@ -52,13 +43,12 @@ public class Member{
 
 		Member m = (Member) obj;
 
-		return this.getName().equals(m.getName()) && this.getPayments().equals(m.getPayments());
+		return this.getName().equals(m.getName()) && this.getID() == (m.getID());
 	}
 
 	public String toString(){
 		StringBuilder sb = new StringBuilder("Member:\n");
 		sb.append("Name: ").append(this.name).append(";");
-		sb.append("payments: ").append(this.payments).append(";");
 		sb.append("\n");
 
 		return sb.toString();

@@ -1,15 +1,21 @@
 package view;
 
-import javax.swing.*;
+import model.Fee;
+import model.Member;
+
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import javax.swing.*;
 import java.awt.*;
+import java.util.stream.Collectors;
 
 
 public class Membros extends JFrame { //esta classe é por sim um frame
 
     private JPanel pl = new JPanel();
 
-    public Membros(List<String> x) {//objetivo da classe, devolver todos eles em lista
+    public Membros(Map<Member,List<Fee>> x) {//objetivo da classe, devolver todos eles em lista
 
         super("Membros do Cesium");
         setSize(700, 700);
@@ -21,7 +27,9 @@ public class Membros extends JFrame { //esta classe é por sim um frame
             for (int i = 0; i < x.size(); i++) {
 
                 JButton l = new JButton();
-                l.setText(x.get(i));
+                List<Member> n = x.keySet().stream().collect(Collectors.toList());
+
+                l.setText(n.get(i).getName());
                 pl.add(l);
             /*l.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
