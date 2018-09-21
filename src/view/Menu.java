@@ -1,18 +1,19 @@
 package view;
 
+import model.Club;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import model.*;
 
 public class Menu {
-
+    private JButton eliminarMembroButton;
+    private JButton adicionarMembroButton;
+    private JButton listaDeMembrosButton;
+    private JPanel my_panel;
     private Club cesium;
-    private JPanel my_panel = new JPanel();
-    private JButton listaDeMembrosButton = new JButton();
-    private JButton adicionarMembrosButton = new JButton();
-    private JButton eliminarMembrosButton = new JButton();
-    private JButton justForFunButton = new JButton();
+
 
 
 
@@ -23,13 +24,6 @@ public class Menu {
         my_panel.setSize(1000,1000);
         menu.setContentPane(my_panel);
 
-
-        justForFunButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null,"Mensagem de erro");
-            }
-        });
 
         listaDeMembrosButton.addActionListener(new ActionListener() {
             @Override
@@ -42,7 +36,7 @@ public class Menu {
             }
         });
 
-        adicionarMembrosButton.addActionListener(new ActionListener() {
+        adicionarMembroButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JFrame m = new JFrame("Novo Membro");
@@ -53,7 +47,6 @@ public class Menu {
                 new_member.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        System.out.println(new_member.getText());
                         cesium.AddMember(new_member.getText());
                     }
                 });
@@ -67,7 +60,6 @@ public class Menu {
         menu.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         menu.pack();
         menu.setVisible(true);
-
 
     }
 
