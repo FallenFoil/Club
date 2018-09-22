@@ -51,7 +51,7 @@ public class Menu {
                         cesium.removeMember(new_member.getText());
                     }
                 });
-
+                m.setVisible(true);
             }
         });
 

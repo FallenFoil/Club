@@ -1,25 +1,39 @@
 package model;
 
-import java.time.LocalDate;
+import Data.ClubDataManager;
+import Data.DataFacade;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
 
-public class Club{
+public class Club implements ModelFacade{
 
+	//Variaveis e metodos de Classe
 	private static Club ourInstance = new Club();
+	private static DataFacade dataManager = new ClubDataManager();
+	private static String file = "test.dss";
 
 	public static Club getInstance() {
 		return ourInstance;
 	}
+	public static void setInstance() {
+		Object o = dataManager.fetchData(Club.file);
+		if(o.getClass() == Club.ourInstance.getClass())
+			Club.ourInstance = (Club) o;
+	}
+
+
+	//Variaveis e metodos de instancia
 
 	public Map<Member,List<Fee>> info;
 
 	public Club(){
+		//Club.setInstance();
 		this.info = new HashMap<>();
 	}
-	
+
 	public Club(Map<Member,List<Fee>> x){
 		setInfo(x);
 	}
