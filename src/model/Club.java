@@ -7,8 +7,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.stream.Collectors;
+import java.io.Serializable;
 
-public class Club implements ModelFacade{
+public class Club implements ModelFacade, Serializable {
 
 	//Variaveis e metodos de Classe
 	private static Club ourInstance = new Club();
@@ -30,7 +32,6 @@ public class Club implements ModelFacade{
 	public Map<Member,List<Fee>> info;
 
 	public Club(){
-		//Club.setInstance();
 		this.info = new HashMap<>();
 	}
 
@@ -96,16 +97,20 @@ public class Club implements ModelFacade{
 	}
 
 	public boolean AddMember(Member x) {
-		if (!this.info.containsKey(x)) {
-			this.info.put(x,new ArrayList<>());
-			return true;
+		for(Member m : this.info.keySet()){
+			if(m.getID() == x.getID()) return false;
 		}
-		return false;
+		this.info.put(x, new ArrayList<>());
+		return true;
 	}
 
-	public void removeMember(String x){
-		if(this.info.containsKey(x)){
-			this.info.remove(x);
+	public boolean removeMember(String x){
+		for(Member a : this.info.keySet()){
+			if(a.getID() ==  Integer.parseInt(x)){
+				this.info.remove(a);
+				return true;
+			}
 		}
+		return false;
 	}
 }

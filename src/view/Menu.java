@@ -8,72 +8,53 @@ import java.awt.event.ActionListener;
 import model.*;
 
 public class Menu {
-    private JButton eliminarMembroButton;
-    private JButton adicionarMembroButton;
-    private JButton listaDeMembrosButton;
-    private JPanel my_panel;
     private Club cesium;
-
-
+    private JPanel fstPN;
+    private JButton secundaryBT;
+    private JList list;
+    private JButton primaryBT;
 
 
     public Menu() {
         this.cesium = Club.getInstance();
         JFrame menu = new JFrame("App Cesium");
+        menu.setContentPane(this.fstPN);
 
-        my_panel.setSize(1000,1000);
-        menu.setContentPane(my_panel);
-
-
-        listaDeMembrosButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try{
-                    new Membros(cesium.getInfo()); //tem Exception defenido
-                }catch (Exception l){
-                    System.out.println(l);
-                };
-            }
-        });
-
-        eliminarMembroButton.addActionListener(new ActionListener() {
+        this.secundaryBT.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JFrame m = new JFrame("Eliminar membro");
                 m.setResizable(false);
                 m.setSize(200, 50);
 
-                JTextField new_member = new JTextField(10);
-                new_member.addActionListener(new ActionListener() {
+                JTextField txt = new JTextField(10);
+                txt.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        //ESTOU A ASSUMIR QUE O ID É SEMPRE O , MUDAR ISTO DEPOIS
-                        cesium.removeMember(new_member.getText());
+
+                        if(cesium.removeMember(txt.getText()) == true){
+                            DefaultListModel modelo = new DefaultListModel();
+                            for (Member cliente : cesium.getInfo().keySet()) {
+                                modelo.addElement(cliente.getID() + "    " + "      " + cliente.getName() );
+                            }
+                            list.setModel(modelo);
+                        }
+                        else {
+                            JOptionPane.showMessageDialog( m ,"Digite um número de aluno válido", "Erro de remoção", JOptionPane.ERROR_MESSAGE);
+                        }
                     }
+
                 });
+                m.add(txt);
                 m.setVisible(true);
             }
         });
 
 
-        adicionarMembroButton.addActionListener(new ActionListener() {
+        this.primaryBT.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JFrame m = new JFrame("Novo Membro");
-                m.setResizable(false);
-                m.setSize(200, 50);
-
-                JTextField new_member = new JTextField(10);
-                new_member.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        //ESTOU A ASSUMIR QUE O ID É SEMPRE O , MUDAR ISTO DEPOIS
-                        cesium.AddMember(new Member(new_member.getText(), 0));
-                    }
-                });
-
-                m.add(new_member);
-                m.setVisible(true);
+                Layout x = new Layout(cesium,list);
 
             }
         });
@@ -85,9 +66,7 @@ public class Menu {
     }
 
     public static void main(String []args){
-
         new Menu();
-
     }
 
 

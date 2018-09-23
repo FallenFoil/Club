@@ -1,13 +1,18 @@
 package model;
 
+import view.Layout;
+
+import javax.swing.*;
+import java.io.Serializable;
 import java.util.Map;
 import java.util.HashMap;
 import java.time.LocalDate;
 
-public class Member{
+public class Member implements Serializable {
 
 	private int ID;
 	private	String name;
+	private JFrame l;
 
 	public Member(){
 		this.name = "n/a";
@@ -18,15 +23,24 @@ public class Member{
 		this.name = name;
 		this.ID = id;
 	}
+
+	public Member(String name,int id,JFrame x){
+		this.name = name;
+		this.ID = id;
+		this.l = x;
+	}
 	
 	public Member(Member x){
 		this.name = x.getName();
 		this.ID = x.getID();
+		this.l = x.getFrame();
 	}
 
 	public String getName(){
 		return this.name;
 	}
+
+	public JFrame getFrame(){return this.l;}
 
 	public int getID(){
 		return this.ID;
@@ -36,6 +50,7 @@ public class Member{
 		this.name = name;
 	}
 
+	public void setLayout(JFrame x){this.l = x;}
 
 	public boolean equals(Object obj){
 		if(obj == this){return true;}
