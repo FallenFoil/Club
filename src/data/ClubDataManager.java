@@ -1,4 +1,4 @@
-package Data;
+package data;
 
 import java.io.ObjectOutputStream;
 import java.io.FileOutputStream;
@@ -29,7 +29,7 @@ public class ClubDataManager implements DataFacade, Serializable {
         } catch (Exception e){
             System.out.println(e.getMessage());
         }
-        System.out.println("Data stored.");
+        System.out.println("data stored.");
     }
 
     public Object fetchData(String fich){
@@ -50,7 +50,7 @@ public class ClubDataManager implements DataFacade, Serializable {
             System.out.println("IO Error: " + e.getMessage());
             return o;
         }
-        System.out.println("Data fetched.");
+        System.out.println("data fetched.");
         return o;
     }
 

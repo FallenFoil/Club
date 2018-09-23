@@ -1,7 +1,10 @@
 package model;
 
-import Data.ClubDataManager;
-import Data.DataFacade;
+//// Imports que não deveriam de estar aqui////
+import data.ClubDataManager;
+///////////////////////////////////////////////
+
+import data.DataFacade;
 
 import java.io.Serializable;
 import java.util.HashMap;

@@ -1,9 +1,14 @@
 package view;
 
+
+//// Imports que não deveriam de estar aqui////
+import data.ClubDataManager;
 import model.Club;
 import model.Member;
-import Data.DataFacade;
-import Data.ClubDataManager;
+///////////////////////////////////////////////
+
+
+import data.DataFacade;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

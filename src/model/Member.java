@@ -1,9 +1,7 @@
 package model;
 
 import java.io.Serializable;
-import java.util.Map;
-import java.util.HashMap;
-import java.time.LocalDate;
+
 
 public class Member implements Serializable {
 
