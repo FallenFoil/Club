@@ -3,17 +3,18 @@ package model;
 import Data.ClubDataManager;
 import Data.DataFacade;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
 
-public class Club implements ModelFacade{
+public class Club implements ModelFacade, Serializable {
 
 	//Variaveis e metodos de Classe
-	private static Club ourInstance = new Club();
 	private static DataFacade dataManager = new ClubDataManager();
 	private static String file = "test.dss";
+	private static Club ourInstance = new Club();
 
 	public static Club getInstance() {
 		return ourInstance;
@@ -30,7 +31,6 @@ public class Club implements ModelFacade{
 	public Map<Member,List<Fee>> info;
 
 	public Club(){
-		//Club.setInstance();
 		this.info = new HashMap<>();
 	}
 

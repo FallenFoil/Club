@@ -1,11 +1,16 @@
 package view;
 
 import model.Club;
+import model.Member;
+import Data.DataFacade;
+import Data.ClubDataManager;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import model.*;
+import java.awt.event.WindowListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowAdapter;
 
 public class Menu {
     private JButton eliminarMembroButton;
@@ -13,11 +18,13 @@ public class Menu {
     private JButton listaDeMembrosButton;
     private JPanel my_panel;
     private Club cesium;
+    private DataFacade df = new ClubDataManager();
 
 
 
 
     public Menu() {
+        Club.setInstance();
         this.cesium = Club.getInstance();
         JFrame menu = new JFrame("App Cesium");
 
@@ -77,7 +84,14 @@ public class Menu {
 
             }
         });
+                WindowListener exitListener = new WindowAdapter() {
 
+                    @Override
+                    public void windowClosing(WindowEvent e) {
+                        df.saveData(cesium, "test.dss");
+                    }
+                };
+                menu.addWindowListener(exitListener);
                 menu.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
                 menu.pack();
                 menu.setVisible(true);

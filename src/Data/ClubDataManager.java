@@ -29,7 +29,7 @@ public class ClubDataManager implements DataFacade, Serializable {
         } catch (Exception e){
             System.out.println(e.getMessage());
         }
-
+        System.out.println("Data stored.");
     }
 
     public Object fetchData(String fich){
@@ -38,15 +38,19 @@ public class ClubDataManager implements DataFacade, Serializable {
         try{
             fis = new FileInputStream(new File(fich));
         } catch (FileNotFoundException e){
-            System.out.println("Ficheiro nao encontrado " + e.getMessage());
+            System.out.println("File not Found: " + e.getMessage());
+            return o;
         }
 
         try{
             ObjectInputStream ois = new ObjectInputStream(fis);
             o = ois.readObject();
             ois.close();
-        } catch (Exception e){}
-
+        } catch (Exception e){
+            System.out.println("IO Error: " + e.getMessage());
+            return o;
+        }
+        System.out.println("Data fetched.");
         return o;
     }
 

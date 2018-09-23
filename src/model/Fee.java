@@ -1,9 +1,10 @@
 package model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 
-public class Fee {
+public class Fee implements Serializable {
     private double value;
     private LocalDate payDay;
     private LocalDate paidDay;
