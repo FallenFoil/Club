@@ -1,21 +1,35 @@
 package view;
 
-import model.Club;
 
+//// Imports que não deveriam de estar aqui////
+import data.ClubDataManager;
+import model.Club;
+import model.Member;
+///////////////////////////////////////////////
+
+
+import data.DataFacade;
 import javax.swing.*;
+import model.ModelFacade;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import model.*;
+import java.awt.event.WindowListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowAdapter;
 
 public class Menu {
-    private Club cesium;
+    private ModelFacade cesium;
     private JPanel fstPN;
     private JButton secundaryBT;
     private JList list;
     private JButton primaryBT;
+    private DataFacade df = new ClubDataManager();
+
+
 
 
     public Menu() {
+        Club.setInstance();
         this.cesium = Club.getInstance();
         JFrame menu = new JFrame("App Cesium");
         menu.setContentPane(this.fstPN);
@@ -58,7 +72,14 @@ public class Menu {
 
             }
         });
+                WindowListener exitListener = new WindowAdapter() {
 
+                    @Override
+                    public void windowClosing(WindowEvent e) {
+                        df.saveData(cesium, "test.dss");
+                    }
+                };
+                menu.addWindowListener(exitListener);
                 menu.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
                 menu.pack();
                 menu.setVisible(true);

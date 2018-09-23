@@ -6,6 +6,6 @@ import java.util.Map;
 public interface ModelFacade {
 
     boolean AddMember(Member x);
-    void removeMember(String x);
+    boolean removeMember(String x);
     Map<Member,List<Fee>> getInfo();
 }
