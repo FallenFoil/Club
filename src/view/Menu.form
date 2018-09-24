@@ -71,10 +71,7 @@
       <component id="ec872" class="javax.swing.JList" binding="list">
         <constraints border-constraint="Center"/>
         <properties>
-          <model>
-            <item value="1998   Maria"/>
-            <item value="1888   Joao Miguel"/>
-          </model>
+          <model/>
           <preferredSize width="300" height="300"/>
         </properties>
       </component>

@@ -10,11 +10,9 @@ import model.Member;
 import data.DataFacade;
 import javax.swing.*;
 import model.ModelFacade;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowListener;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowAdapter;
+import java.awt.event.*;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 
 public class Menu {
@@ -73,12 +71,28 @@ public class Menu {
         });
 
         WindowListener exitListener = new WindowAdapter() {
-
             @Override
             public void windowClosing(WindowEvent e) {
                 df.saveData(cesium, "test.dss");
+                    }
+        };
+
+        menu.addWindowListener(exitListener);
+        menu.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        menu.pack();
+        menu.setVisible(true);
+        list.addComponentListener(new ComponentAdapter() { } );
+
+        MouseListener mouseListener = new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                if (e.getClickCount() == 2) {
+                    int index = list.locationToIndex(e.getPoint());
+                    JFrame x = cesium.getInfo().keySet().stream().collect(Collectors.toList()).get(index).getFrame();
+                    x.setVisible(true);
+                }
             }
         };
+        list.addMouseListener(mouseListener);
 
         menu.addWindowListener(exitListener);
         menu.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);

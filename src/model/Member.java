@@ -1,21 +1,25 @@
 package model;
 
+
 import view.Layout;
 
+import java.util.*;
 import javax.swing.*;
 import java.io.Serializable;
-import java.util.Map;
-import java.util.HashMap;
 import java.time.LocalDate;
 
 
-public class Member implements Serializable {
+public class Member implements Serializable{
 
+	//private List observers = new ArrayList<>();
+	//private boolean fee ;
 	private int ID;
 	private	String name;
 	private JFrame l;
 
+
 	public Member(){
+		//this.fee = false;
 		this.name = "n/a";
 		this.ID = 0;
 	}
@@ -36,6 +40,24 @@ public class Member implements Serializable {
 		this.ID = x.getID();
 		this.l = x.getFrame();
 	}
+	/*
+	public void setCotas(){
+		this.fee = true;
+		this.notifyObservers();
+	}
+
+	public void addObserver(Observer observer) {
+		observers.add(observer);
+	}
+	public void deleteObserver(Observer o){
+		observers.remove(o);
+	}
+
+	public void notifyObservers(Object arg){
+		for(Observer x : this.observers){
+			x.update(this.fee);
+		}
+	}*/
 
 	public String getName(){
 		return this.name;

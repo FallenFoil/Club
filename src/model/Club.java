@@ -5,16 +5,14 @@ import data.ClubDataManager;
 ///////////////////////////////////////////////
 
 import data.DataFacade;
+import view.Layout;
 
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.io.Serializable;
 
-public class Club implements ModelFacade, Serializable {
+public class Club implements ModelFacade, Serializable  {
 
 	//Variaveis e metodos de Classe
 	private static DataFacade dataManager;
@@ -35,7 +33,12 @@ public class Club implements ModelFacade, Serializable {
 
 	//Variaveis e metodos de instancia
 
-	private Map<Member,List<Fee>> info;
+
+	/**
+	 * MUDAR , fazer hash code para para os ID serem organizados por ordem
+	 */
+	public Map<Member,List<Fee>> info;
+
 
 	public Club(){
 		this.info = new HashMap<>();
