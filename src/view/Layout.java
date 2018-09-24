@@ -7,6 +7,7 @@ import model.ModelFacade;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.stream.Collectors;
 
 /**
  * Classe defenida para criar um membro
@@ -14,6 +15,7 @@ import java.awt.event.ActionListener;
  */
 
 public class Layout {
+    private boolean used;//significa se o panel foi usado ou não
     private JPanel layout_panel;
     private JLabel number;
     private JLabel Adress;
@@ -27,7 +29,6 @@ public class Layout {
     private JTextField curseTF;
     private JButton feeBT;
     private JButton refreshBT;
-    private JButton Close;
     private String member_name;
     private int ID;
 
@@ -36,6 +37,7 @@ public class Layout {
         layout.setSize(350,300);
         layout.setContentPane(this.layout_panel);
         layout.setVisible(true);
+        this.used = false;
 
         this.numberTF.addActionListener(new ActionListener() {
             @Override
@@ -74,26 +76,41 @@ public class Layout {
         refreshBT.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(x.AddMember(new Member(member_name,ID,layout)) == true){
+                if (used == false) {
+                    if (x.AddMember(new Member(member_name, ID,layout)) == true) {
+                        DefaultListModel modelo = new DefaultListModel();
+                        for (Member cliente : x.getInfo().keySet()) {
+                            modelo.addElement(cliente.getID() + "    " + "      " + cliente.getName());
+                        }
+
+                        list.setModel(modelo);
+                        setUsed(true);
+                        layout.dispose();
+                    } else {
+                        JOptionPane.showMessageDialog(layout, "Digite um número de aluno válido, número atual já existente", "Erro de validação", JOptionPane.ERROR_MESSAGE);
+                    }
+                }else{
+                    for(Member x : x.getInfo().keySet()){
+                        if(x.getID()==ID){
+                            x.setName(member_name);
+                            x.setLayout(layout);
+                        }
+                    }
+
                     DefaultListModel modelo = new DefaultListModel();
                     for (Member cliente : x.getInfo().keySet()) {
-                        modelo.addElement(cliente.getID() + "    " + "      " + cliente.getName() );
+                        modelo.addElement(cliente.getID() + "    " + "      " + cliente.getName());
                     }
 
                     list.setModel(modelo);
+                    layout.dispose();
                 }
-                else {
-                    JOptionPane.showMessageDialog( layout,"Digite um número de aluno válido, número atual já existente", "Erro de validação", JOptionPane.ERROR_MESSAGE);
-                }
+
             }
-        });
-        Close.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                layout.dispose();
-            }
+
         });
     }
+
 
     public void setName(String x){
         this.member_name = x;
@@ -101,6 +118,7 @@ public class Layout {
     public void setId(int x){
         this.ID = x;
     }
+    public void setUsed(Boolean x){this.used = x;}
 
 
 }
