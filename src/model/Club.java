@@ -17,9 +17,11 @@ import java.io.Serializable;
 public class Club implements ModelFacade, Serializable {
 
 	//Variaveis e metodos de Classe
-	private static DataFacade dataManager = new ClubDataManager();
+	private static DataFacade dataManager;
 	private static String file = "test.dss";
 	private static Club ourInstance = new Club();
+	//Para manter a mesma versão da instancia no ficheiro
+	private static final long serialVersionUID = 1L;
 
 	public static Club getInstance() {
 		return ourInstance;
@@ -33,7 +35,7 @@ public class Club implements ModelFacade, Serializable {
 
 	//Variaveis e metodos de instancia
 
-	public Map<Member,List<Fee>> info;
+	private Map<Member,List<Fee>> info;
 
 	public Club(){
 		this.info = new HashMap<>();
@@ -48,6 +50,17 @@ public class Club implements ModelFacade, Serializable {
 			this.info = x.getInfo();
 		}catch (Exception e){
 			this.info = new HashMap<>();
+		}
+	}
+
+	public Club(DataFacade df){
+		Club.dataManager = df;
+		new Club();
+	}
+
+	public void saveClub(String fich){
+		if(Club.dataManager != null){
+			Club.dataManager.saveData(this, fich);
 		}
 	}
 
@@ -78,7 +91,7 @@ public class Club implements ModelFacade, Serializable {
 	public boolean equals(Object obj){
 
 		if(obj == this){return true;}
-		if(obj == null || obj.getClass()!=this.getClass()){return false;}
+		if(obj == null || obj.getClass()!=this.getClass()) return false;
 
 		Club c = (Club) obj;
 

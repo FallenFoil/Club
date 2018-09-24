@@ -3,7 +3,6 @@ package view;
 
 //// Imports que não deveriam de estar aqui////
 import data.ClubDataManager;
-import model.Club;
 import model.Member;
 ///////////////////////////////////////////////
 
@@ -17,6 +16,7 @@ import java.awt.event.WindowListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowAdapter;
 
+
 public class Menu {
     private ModelFacade cesium;
     private JPanel fstPN;
@@ -28,9 +28,8 @@ public class Menu {
 
 
 
-    public Menu() {
-        Club.setInstance();
-        this.cesium = Club.getInstance();
+    public Menu(ModelFacade cesium) {
+        this.cesium = cesium;
         JFrame menu = new JFrame("App Cesium");
         menu.setContentPane(this.fstPN);
 
@@ -72,23 +71,18 @@ public class Menu {
 
             }
         });
-                WindowListener exitListener = new WindowAdapter() {
 
-                    @Override
-                    public void windowClosing(WindowEvent e) {
-                        df.saveData(cesium, "test.dss");
-                    }
-                };
-                menu.addWindowListener(exitListener);
-                menu.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-                menu.pack();
-                menu.setVisible(true);
+        WindowListener exitListener = new WindowAdapter() {
 
+            @Override
+            public void windowClosing(WindowEvent e) {
+                df.saveData(cesium, "test.dss");
+            }
+        };
+
+        menu.addWindowListener(exitListener);
+        menu.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        menu.pack();
+        menu.setVisible(true);
     }
-
-    public static void main(String []args){
-        new Menu();
-    }
-
-
 }

@@ -20,6 +20,7 @@ public class ClubDataManager implements data.DataFacade, Serializable {
             fos = new FileOutputStream(new File(fich));
         } catch (FileNotFoundException e){
             System.out.println("Ficheiro nao encontrado " + e.getMessage());
+            return;
         }
 
         try{
@@ -27,7 +28,8 @@ public class ClubDataManager implements data.DataFacade, Serializable {
             oos.writeObject(o);
             oos.close();
         } catch (Exception e){
-            System.out.println(e.getMessage());
+            System.out.println("Something went wrong while writting: " + e.getMessage());
+            return;
         }
         System.out.println("data stored.");
     }
