@@ -38,46 +38,27 @@ public class Layout {
         this.layout = new JFrame("Membro");
         layout.setSize(350,300);
         layout.setContentPane(this.layout_panel);
+        layout.setLocationRelativeTo(null);
         layout.setVisible(true);
         this.used = false;
-
-        this.numberTF.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String x = numberTF.getText();
-                int y = Integer.parseInt(x);
-                setId(y);
-            }
-        });
-        nameTF.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String x = nameTF.getText();
-                setName(x);
-            }
-        });
-        curseTF.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String x = curseTF.getText();
-            }
-        });
-        yearTF.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String x = yearTF.getText();
-            }
-        });
-        adressTF.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String x = adressTF.getText();
-            }
-        });
 
         refreshBT.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                String str;
+                str = numberTF.getText();
+                int y = Integer.parseInt(str);
+                setId(y);
+
+                str = nameTF.getText();
+                setName(str);
+
+                String strCurse = curseTF.getText();
+
+                String strYear = yearTF.getText();
+
+                String strAdress = adressTF.getText();
+
                 if (used == false) {
                     if (x.AddMember(new Member(member_name, ID)) == true) {
                         DefaultListModel modelo = new DefaultListModel();

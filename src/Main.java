@@ -4,6 +4,7 @@ import model.ModelFacade;
 import data.ClubDataManager;
 import model.Club;
 
+import javax.swing.*;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -16,6 +17,19 @@ public class Main /* implements Observer*/ {
     public static void main(String []args){
         Club.setInstance();
         c = Club.getInstance();
+
+        try {
+            for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+                if ("GTK+".equals(info.getName())) {
+                    UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        }
+        catch(Exception e){
+            System.err.println("Error on changing the theme!");
+        }
+
         new Menu(c);
     }
 

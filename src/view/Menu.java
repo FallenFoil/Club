@@ -12,10 +12,10 @@ import model.Member;
 import data.DataFacade;
 import javax.swing.*;
 import model.ModelFacade;
+import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.List;
-
 
 public class Menu {
     private ModelFacade cesium;
@@ -38,12 +38,31 @@ public class Menu {
             public void actionPerformed(ActionEvent e) {
                 JFrame m = new JFrame("Eliminar membro");
                 m.setResizable(false);
-                m.setSize(200, 50);
+                m.setSize(300, 200);
+                m.setLayout(new GridLayout(3, 1));
 
+                JLabel msg = new JLabel(" Insira o numero de membro a remover:");
+
+                JPanel textFieldPanel = new JPanel(new GridLayout(2, 1));
+                JLabel fieldmsg1 = new JLabel("");
                 JTextField txt = new JTextField(10);
                 txt.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
+
+                    }
+
+                });
+                textFieldPanel.add(txt);
+                textFieldPanel.add(fieldmsg1);
+
+                JPanel donePanel = new JPanel(new GridLayout(1, 3));
+                JLabel done1 = new JLabel("");
+                JLabel done2 = new JLabel("");
+                JButton doneButton = new JButton("Done");
+                doneButton.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent actionEvent){
                         int i=0;
                         for(Member x : cesium.getInfo().keySet()){
                             if(x.getID() == Integer.parseInt(txt.getText())){
@@ -56,7 +75,7 @@ public class Menu {
                         if(cesium.removeMember(txt.getText()) == true){
                             DefaultListModel modelo = new DefaultListModel();
                             for (Member cliente : cesium.getInfo().keySet()) {
-                                modelo.addElement(cliente.getID() + "    " + "      " + cliente.getName() );
+                                modelo.addElement(cliente.getID() + cliente.getName() );
                             }
 
                             list.setModel(modelo);
@@ -64,10 +83,18 @@ public class Menu {
                         else {
                             JOptionPane.showMessageDialog( m ,"Digite um número de aluno válido", "Erro de remoção", JOptionPane.ERROR_MESSAGE);
                         }
-                    }
 
+                        m.dispose();
+                    }
                 });
-                m.add(txt);
+                donePanel.add(done1);
+                donePanel.add(done2);
+                donePanel.add(doneButton);
+
+                m.add(msg);
+                m.add(textFieldPanel);
+                m.add(donePanel);
+                m.setLocationRelativeTo(null);
                 m.setVisible(true);
             }
         });
@@ -90,11 +117,6 @@ public class Menu {
                 df.saveData(cesium, "test.dss");
                     }
         };
-
-        menu.addWindowListener(exitListener);
-        menu.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        menu.pack();
-        menu.setVisible(true);
         list.addComponentListener(new ComponentAdapter() { } );
 
         MouseListener mouseListener = new MouseAdapter() {
@@ -111,6 +133,7 @@ public class Menu {
         menu.addWindowListener(exitListener);
         menu.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         menu.pack();
+        menu.setLocationRelativeTo(null);
         menu.setVisible(true);
     }
 }
