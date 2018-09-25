@@ -7,6 +7,7 @@ import model.ModelFacade;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 import java.util.stream.Collectors;
 
 /**
@@ -17,6 +18,7 @@ import java.util.stream.Collectors;
 public class Layout {
     private boolean used;//significa se o panel foi usado ou não
     private JPanel layout_panel;
+    private JFrame layout;
     private JLabel number;
     private JLabel Adress;
     private JLabel name;
@@ -32,8 +34,8 @@ public class Layout {
     private String member_name;
     private int ID;
 
-    public Layout(ModelFacade x, JList list){
-        JFrame layout = new JFrame("Membro");
+    public Layout(ModelFacade x, JList list, List<JFrame> frames){
+        this.layout = new JFrame("Membro");
         layout.setSize(350,300);
         layout.setContentPane(this.layout_panel);
         layout.setVisible(true);
@@ -77,7 +79,7 @@ public class Layout {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (used == false) {
-                    if (x.AddMember(new Member(member_name, ID,layout)) == true) {
+                    if (x.AddMember(new Member(member_name, ID)) == true) {
                         DefaultListModel modelo = new DefaultListModel();
                         for (Member cliente : x.getInfo().keySet()) {
                             modelo.addElement(cliente.getID() + "    " + "      " + cliente.getName());
@@ -85,6 +87,7 @@ public class Layout {
 
                         list.setModel(modelo);
                         setUsed(true);
+                        frames.add(layout);
                         layout.dispose();
                     } else {
                         JOptionPane.showMessageDialog(layout, "Digite um número de aluno válido, número atual já existente", "Erro de validação", JOptionPane.ERROR_MESSAGE);
@@ -93,7 +96,6 @@ public class Layout {
                     for(Member x : x.getInfo().keySet()){
                         if(x.getID()==ID){
                             x.setName(member_name);
-                            x.setLayout(layout);
                         }
                     }
 
@@ -105,7 +107,6 @@ public class Layout {
                     list.setModel(modelo);
                     layout.dispose();
                 }
-
             }
 
         });
@@ -119,6 +120,5 @@ public class Layout {
         this.ID = x;
     }
     public void setUsed(Boolean x){this.used = x;}
-
 
 }

@@ -17,13 +17,17 @@ public class Club implements ModelFacade, Serializable  {
 	//Variaveis e metodos de Classe
 	private static DataFacade dataManager;
 	private static String file = "test.dss";
-	private static Club ourInstance = new Club();
+
+
 	//Para manter a mesma versão da instancia no ficheiro
 	private static final long serialVersionUID = 1L;
+
+	private static Club ourInstance = new Club();
 
 	public static Club getInstance() {
 		return ourInstance;
 	}
+
 	public static void setInstance() {
 		Object o = dataManager.fetchData(Club.file);
 		if(o.getClass() == Club.ourInstance.getClass())
@@ -33,15 +37,11 @@ public class Club implements ModelFacade, Serializable  {
 
 	//Variaveis e metodos de instancia
 
-
-	/**
-	 * MUDAR , fazer hash code para para os ID serem organizados por ordem
-	 */
 	public Map<Member,List<Fee>> info;
 
 
-	public Club(){
-		this.info = new HashMap<>();
+	public Club() {
+		this.info = new  LinkedHashMap<>();
 	}
 
 	public Club(Map<Member,List<Fee>> x){
@@ -52,7 +52,7 @@ public class Club implements ModelFacade, Serializable  {
 		try {
 			this.info = x.getInfo();
 		}catch (Exception e){
-			this.info = new HashMap<>();
+			this.info = new  LinkedHashMap<>();
 		}
 	}
 
@@ -72,7 +72,7 @@ public class Club implements ModelFacade, Serializable  {
 
 	public Map<Member,List<Fee>> getInfo(){
 
-		Map<Member,List<Fee>> result = new HashMap<>();
+		Map<Member,List<Fee>> result = new  LinkedHashMap<>();
 
 		for(Map.Entry<Member ,List<Fee>> entry : this.info.entrySet()){
 
@@ -84,7 +84,7 @@ public class Club implements ModelFacade, Serializable  {
 
 	//Setters!
 	public void setInfo(Map<Member,List<Fee>> x){
-		this.info = new HashMap<>();
+		this.info = new LinkedHashMap<>();
 		for(Map.Entry<Member,List<Fee>> entry : x.entrySet()){
 			this.info.put(entry.getKey(), entry.getValue());
 		}

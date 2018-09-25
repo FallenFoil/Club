@@ -46,4 +46,6 @@ public class Fee implements Serializable {
         this.paidDay = paidDay;
     }
 
+    public Fee clone(){return this.clone();}
+
 }

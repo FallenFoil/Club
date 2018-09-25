@@ -15,7 +15,6 @@ public class Member implements Serializable{
 	//private boolean fee ;
 	private int ID;
 	private	String name;
-	private JFrame l;
 
 
 	public Member(){
@@ -29,16 +28,9 @@ public class Member implements Serializable{
 		this.ID = id;
 	}
 
-	public Member(String name,int id,JFrame x){
-		this.name = name;
-		this.ID = id;
-		this.l = x;
-	}
-	
 	public Member(Member x){
 		this.name = x.getName();
 		this.ID = x.getID();
-		this.l = x.getFrame();
 	}
 	/*
 	public void setCotas(){
@@ -63,7 +55,6 @@ public class Member implements Serializable{
 		return this.name;
 	}
 
-	public JFrame getFrame(){return this.l;}
 
 	public int getID(){
 		return this.ID;
@@ -72,8 +63,6 @@ public class Member implements Serializable{
 	public void setName(String name){
 		this.name = name;
 	}
-
-	public void setLayout(JFrame x){this.l = x;}
 
 	public boolean equals(Object obj){
 		if(obj == this){return true;}
