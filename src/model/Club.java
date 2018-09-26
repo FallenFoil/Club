@@ -5,8 +5,6 @@ import data.DataFacade;
 
 import java.io.Serializable;
 import java.util.*;
-import java.util.stream.Collectors;
-import java.io.Serializable;
 
 public class Club implements ModelFacade, Serializable  {
 
@@ -33,7 +31,7 @@ public class Club implements ModelFacade, Serializable  {
 
 	//Variaveis e metodos de instancia
 
-	public Map<Member,List<Fee>> info;
+	private Map<Member,List<Fee>> info;
 
 
 	public Club() {
@@ -42,14 +40,6 @@ public class Club implements ModelFacade, Serializable  {
 
 	public Club(Map<Member,List<Fee>> x){
 		setInfo(x);
-	}
-
-	public Club(Club x){
-		try {
-			this.info = x.getInfo();
-		}catch (Exception e){
-			this.info = new  LinkedHashMap<>();
-		}
 	}
 
 	public Club(DataFacade df){
@@ -102,7 +92,7 @@ public class Club implements ModelFacade, Serializable  {
 
 
 	public Club clone(){
-		return new Club(this);
+		return Club.getInstance();
 	}
 
 	public String toString(){

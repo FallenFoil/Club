@@ -1,12 +1,11 @@
 package view;
 
-
+import model.ModelFacade;
 //// Imports que não deveriam de estar aqui////
 import model.Member;
 ///////////////////////////////////////////////
 
 import javax.swing.*;
-import model.ModelFacade;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;

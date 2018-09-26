@@ -1,7 +1,8 @@
 package view;
 
-import model.Club;
+//// Imports que não deveriam de estar aqui////
 import model.Member;
+///////////////////////////////////////////////
 import model.ModelFacade;
 
 import javax.swing.*;
@@ -59,8 +60,8 @@ public class Layout {
 
                 String strAdress = adressTF.getText();
 
-                if (used == false) {
-                    if (x.AddMember(new Member(member_name, ID)) == true) {
+                if (!used) {
+                    if (x.AddMember(ID, member_name)) {
                         DefaultListModel modelo = new DefaultListModel();
                         for (Member cliente : x.getInfo().keySet()) {
                             modelo.addElement(cliente.getID() + "    " + "      " + cliente.getName());
