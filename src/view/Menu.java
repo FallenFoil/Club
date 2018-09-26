@@ -2,14 +2,9 @@ package view;
 
 
 //// Imports que não deveriam de estar aqui////
-import com.sun.org.apache.xpath.internal.operations.Mod;
-import data.ClubDataManager;
-import model.Club;
 import model.Member;
 ///////////////////////////////////////////////
 
-
-import data.DataFacade;
 import javax.swing.*;
 import model.ModelFacade;
 import java.awt.*;
@@ -23,9 +18,7 @@ public class Menu {
     private JButton secundaryBT;
     private JList list;
     private JButton primaryBT;
-    private DataFacade df = new ClubDataManager();
     private List<JFrame> frames = new ArrayList<>();
-
 
 
     public Menu(ModelFacade cesium) {
@@ -72,7 +65,7 @@ public class Menu {
                         }
                         i=0;
 
-                        if(cesium.removeMember(txt.getText()) == true){
+                        if(cesium.removeMember(txt.getText())){
                             DefaultListModel modelo = new DefaultListModel();
                             for (Member cliente : cesium.getInfo().keySet()) {
                                 modelo.addElement(cliente.getID() + cliente.getName() );
@@ -114,8 +107,8 @@ public class Menu {
         WindowListener exitListener = new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                df.saveData(cesium, "test.dss");
-                    }
+                cesium.save();
+            }
         };
         list.addComponentListener(new ComponentAdapter() { } );
 

@@ -1,11 +1,7 @@
 package model;
 
-//// Imports que não deveriam de estar aqui////
-import data.ClubDataManager;
-///////////////////////////////////////////////
 
 import data.DataFacade;
-import view.Layout;
 
 import java.io.Serializable;
 import java.util.*;
@@ -61,9 +57,9 @@ public class Club implements ModelFacade, Serializable  {
 		new Club();
 	}
 
-	public void saveClub(String fich){
+	public void save(){
 		if(Club.dataManager != null){
-			Club.dataManager.saveData(this, fich);
+			Club.dataManager.saveData(this, Club.file);
 		}
 	}
 
@@ -116,11 +112,11 @@ public class Club implements ModelFacade, Serializable  {
 		return sb.toString();
 	}
 
-	public boolean AddMember(Member x) {
+	public boolean AddMember(int id, String nome) {
 		for(Member m : this.info.keySet()){
-			if(m.getID() == x.getID()) return false;
+			if(m.getID() == id) return false;
 		}
-		this.info.put(x, new ArrayList<>());
+		this.info.put(new Member(nome, id), new ArrayList<>());
 		return true;
 	}
 
