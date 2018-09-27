@@ -30,6 +30,35 @@ public class Menu {
         JScrollPane scrollPanel = new JScrollPane(lists);
         menu.getContentPane().add(scrollPanel);
 
+        secundaryButton();
+
+        primaryButton();
+
+        WindowListener exitListener = exitL();
+
+        mouseL();
+
+        menu.addWindowListener(exitListener);
+        menu.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        menu.pack();
+        menu.setLocationRelativeTo(null);
+        menu.setVisible(true);
+    }
+
+    private void primaryButton(){
+        this.primaryBT.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                Layout x = new Layout(cesium,list1,list2,frames);
+                for(int i=0; i<frames.size(); i++){
+                    System.out.println(frames.get(i).getX());
+                }
+            }
+        });
+    }
+
+    private void secundaryButton(){
         this.secundaryBT.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -97,28 +126,9 @@ public class Menu {
                 m.setVisible(true);
             }
         });
+    }
 
-
-        this.primaryBT.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-                Layout x = new Layout(cesium,list1,list2,frames);
-                for(int i=0; i<frames.size(); i++){
-                    System.out.println(frames.get(i).getX());
-                }
-            }
-        });
-
-        WindowListener exitListener = new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                cesium.save();
-            }
-        };
-        list1.addComponentListener(new ComponentAdapter() { } );
-        list2.addComponentListener(new ComponentAdapter() { } );
-
+    private void mouseL(){
         MouseListener mouseListener = new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2) {
@@ -133,11 +143,17 @@ public class Menu {
         };
         list1.addMouseListener(mouseListener);
         list2.addMouseListener(mouseListener);
+    }
 
-        menu.addWindowListener(exitListener);
-        menu.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        menu.pack();
-        menu.setLocationRelativeTo(null);
-        menu.setVisible(true);
+    private WindowListener exitL(){
+        WindowListener exitListener = new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                cesium.save();
+            }
+        };
+        list1.addComponentListener(new ComponentAdapter() { } );
+        list2.addComponentListener(new ComponentAdapter() { } );
+        return exitListener;
     }
 }
