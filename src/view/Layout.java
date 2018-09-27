@@ -20,13 +20,11 @@ public class Layout {
     private boolean used;//significa se o panel foi usado ou não
     private JPanel layout_panel;
     private JFrame layout;
-    private JLabel number;
-    private JLabel Adress;
-    private JLabel name;
-    private JLabel curse;
-    private JLabel Year;
+    private  JLabel number;
+    private  JLabel year;
+    private  JLabel name;
+    private  JLabel curse;
     private JTextField numberTF;
-    private JTextField adressTF;
     private JTextField yearTF;
     private JTextField nameTF;
     private JTextField curseTF;
@@ -35,7 +33,7 @@ public class Layout {
     private String member_name;
     private int ID;
 
-    public Layout(ModelFacade x, JList list, List<JFrame> frames){
+    public Layout(ModelFacade x, JList numberlist, JList namelist, List<JFrame> frames){
         this.layout = new JFrame("Membro");
         layout.setSize(350,300);
         layout.setContentPane(this.layout_panel);
@@ -58,16 +56,18 @@ public class Layout {
 
                 String strYear = yearTF.getText();
 
-                String strAdress = adressTF.getText();
 
                 if (!used) {
                     if (x.AddMember(ID, member_name)) {
-                        DefaultListModel modelo = new DefaultListModel();
+                        DefaultListModel numberModelo = new DefaultListModel();
+                        DefaultListModel nameModelo = new DefaultListModel();
                         for (Member cliente : x.getInfo().keySet()) {
-                            modelo.addElement(cliente.getID() + "    " + "      " + cliente.getName());
+                            numberModelo.addElement(cliente.getID());
+                            nameModelo.addElement(cliente.getName());
                         }
 
-                        list.setModel(modelo);
+                        numberlist.setModel(numberModelo);
+                        namelist.setModel(nameModelo);
                         setUsed(true);
                         frames.add(layout);
                         layout.dispose();
@@ -81,12 +81,15 @@ public class Layout {
                         }
                     }
 
-                    DefaultListModel modelo = new DefaultListModel();
+                    DefaultListModel numberModelo = new DefaultListModel();
+                    DefaultListModel nameModelo = new DefaultListModel();
                     for (Member cliente : x.getInfo().keySet()) {
-                        modelo.addElement(cliente.getID() + "    " + "      " + cliente.getName());
+                        numberModelo.addElement(cliente.getID());
+                        nameModelo.addElement(cliente.getName());
                     }
 
-                    list.setModel(modelo);
+                    numberlist.setModel(numberModelo);
+                    namelist.setModel(nameModelo);
                     layout.dispose();
                 }
             }

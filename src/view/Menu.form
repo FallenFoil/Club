@@ -2,31 +2,22 @@
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="view.Menu">
   <grid id="27dc6" binding="fstPN" layout-manager="BorderLayout" hgap="0" vgap="0">
     <constraints>
-      <xy x="20" y="20" width="500" height="400"/>
+      <xy x="20" y="20" width="500" height="460"/>
     </constraints>
     <properties>
       <preferredSize width="300" height="300"/>
     </properties>
     <border type="none"/>
     <children>
-      <grid id="373b7" layout-manager="GridLayoutManager" row-count="2" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+      <grid id="373b7" layout-manager="GridLayoutManager" row-count="4" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
         <margin top="0" left="0" bottom="0" right="0"/>
         <constraints border-constraint="North"/>
         <properties/>
         <border type="none"/>
         <children>
-          <grid id="ca6a5" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-            <margin top="0" left="0" bottom="0" right="0"/>
-            <constraints>
-              <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties/>
-            <border type="none"/>
-            <children/>
-          </grid>
           <component id="1376b" class="javax.swing.JButton" binding="secundaryBT">
             <constraints>
-              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+              <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <text value="Remover"/>
@@ -34,47 +25,105 @@
           </component>
           <component id="b5ad7" class="javax.swing.JButton" binding="primaryBT">
             <constraints>
-              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+              <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <text value="Adicionar"/>
             </properties>
           </component>
-          <grid id="a20b1" layout-manager="GridLayoutManager" row-count="1" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-            <margin top="0" left="0" bottom="0" right="0"/>
+          <hspacer id="51f21">
             <constraints>
-              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+              <grid row="1" column="0" row-span="1" col-span="2" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
-            <properties/>
-            <border type="none"/>
-            <children>
-              <component id="22612" class="javax.swing.JLabel">
-                <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <text value="Número"/>
-                </properties>
-              </component>
-              <component id="cba55" class="javax.swing.JLabel">
-                <constraints>
-                  <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <text value="Nome"/>
-                </properties>
-              </component>
-            </children>
-          </grid>
+          </hspacer>
+          <component id="5408c" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value=""/>
+            </properties>
+          </component>
+          <component id="cba55" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value=" Nome"/>
+            </properties>
+          </component>
+          <component id="22612" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value=" Número"/>
+            </properties>
+          </component>
         </children>
       </grid>
-      <component id="ec872" class="javax.swing.JList" binding="list">
+      <grid id="67340" binding="lists" layout-manager="GridLayoutManager" row-count="1" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
         <constraints border-constraint="Center"/>
-        <properties>
-          <model/>
-          <preferredSize width="300" height="300"/>
-        </properties>
-      </component>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <component id="b8ed7" class="javax.swing.JList" binding="list1">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="2" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="50"/>
+              </grid>
+            </constraints>
+            <properties>
+              <model>
+                <item value="80494"/>
+                <item value="81434"/>
+                <item value="77123"/>
+                <item value="94376"/>
+                <item value="80365"/>
+                <item value="74506"/>
+                <item value="26834"/>
+                <item value="54834"/>
+                <item value="81456"/>
+                <item value="82345"/>
+                <item value="83415"/>
+                <item value="83026"/>
+                <item value="80675"/>
+                <item value="82153"/>
+                <item value="85743"/>
+                <item value="92354"/>
+              </model>
+            </properties>
+          </component>
+          <component id="e38b5" class="javax.swing.JList" binding="list2" default-binding="true">
+            <constraints>
+              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="6" hsize-policy="2" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="50"/>
+              </grid>
+            </constraints>
+            <properties>
+              <model>
+                <item value="Luis1"/>
+                <item value="Luis2"/>
+                <item value="Luis3"/>
+                <item value="Luis4"/>
+                <item value="Luis5"/>
+                <item value="Luis6"/>
+                <item value="Luis7"/>
+                <item value="Luis8"/>
+                <item value="Luis9"/>
+                <item value="Luis10"/>
+                <item value="Luis11"/>
+                <item value="Luis12"/>
+                <item value="Luis13"/>
+                <item value="Luis14"/>
+                <item value="Luis15"/>
+                <item value="Luis16"/>
+              </model>
+            </properties>
+          </component>
+        </children>
+      </grid>
     </children>
   </grid>
 </form>
