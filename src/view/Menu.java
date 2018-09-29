@@ -1,5 +1,6 @@
 package view;
 
+import model.Fee;
 import model.ModelFacade;
 //// Imports que não deveriam de estar aqui////
 import model.Member;
@@ -8,22 +9,26 @@ import model.Member;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.ArrayList;
+import java.util.*;
 import java.util.List;
 
 public class Menu {
     private ModelFacade cesium;
     private JPanel fstPN;
     private JButton secundaryBT;
-    private JList list1;
-    private JList list2;
+    private JList numberList;
+    private JList nameList;
     private JButton primaryBT;
     private JPanel lists;
-    private List<JFrame> frames = new ArrayList<>();
+    private List<JFrame> frames ;
+    private List<Fee> fees;
 
+    public Menu(ModelFacade Cesium) {
 
-    public Menu(ModelFacade cesium) {
-        this.cesium = cesium;
+        this.cesium = Cesium;
+        this.frames = new ArrayList<>();
+        this.fees = new ArrayList<>();
+
         JFrame menu = new JFrame("App Cesium");
         menu.setContentPane(this.fstPN);
 
@@ -49,11 +54,8 @@ public class Menu {
         this.primaryBT.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
-                Layout x = new Layout(cesium,list1,list2,frames);
-                for(int i=0; i<frames.size(); i++){
-                    System.out.println(frames.get(i).getX());
-                }
+                int tmp_size = fees.size();
+                Layout x = new Layout(cesium, numberList, nameList,frames,fees,tmp_size);
             }
         });
     }
@@ -105,8 +107,8 @@ public class Menu {
                                 numberModelo.addElement(cliente.getID());
                                 nameModelo.addElement(cliente.getName());
                             }
-                            list1.setModel(numberModelo);
-                            list2.setModel(nameModelo);
+                            numberList.setModel(numberModelo);
+                            nameList.setModel(nameModelo);
                         }
                         else {
                             JOptionPane.showMessageDialog( m ,"Digite um número de aluno válido", "Erro de remoção", JOptionPane.ERROR_MESSAGE);
@@ -132,17 +134,12 @@ public class Menu {
         MouseListener mouseListener = new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2) {
-                    int index1 = list1.locationToIndex(e.getPoint());
-                    int index2 = list2.locationToIndex(e.getPoint());
-                    frames.get(index1).setVisible(true);
-                    frames.get(index2).setVisible(true);
-                    System.out.println(index1);
-                    System.out.println(index2);
+                    int index = nameList.locationToIndex(e.getPoint());
+                    frames.get(index).setVisible(true);
                 }
             }
         };
-        list1.addMouseListener(mouseListener);
-        list2.addMouseListener(mouseListener);
+        nameList.addMouseListener(mouseListener);
     }
 
     private WindowListener exitL(){
@@ -152,8 +149,8 @@ public class Menu {
                 cesium.save();
             }
         };
-        list1.addComponentListener(new ComponentAdapter() { } );
-        list2.addComponentListener(new ComponentAdapter() { } );
+        numberList.addComponentListener(new ComponentAdapter() { } );
+        nameList.addComponentListener(new ComponentAdapter() { } );
         return exitListener;
     }
 }

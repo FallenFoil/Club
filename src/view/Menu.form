@@ -68,58 +68,24 @@
         <properties/>
         <border type="none"/>
         <children>
-          <component id="b8ed7" class="javax.swing.JList" binding="list1">
+          <component id="b8ed7" class="javax.swing.JList" binding="numberList">
             <constraints>
               <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="2" anchor="0" fill="3" indent="0" use-parent-layout="false">
                 <preferred-size width="150" height="50"/>
               </grid>
             </constraints>
             <properties>
-              <model>
-                <item value="80494"/>
-                <item value="81434"/>
-                <item value="77123"/>
-                <item value="94376"/>
-                <item value="80365"/>
-                <item value="74506"/>
-                <item value="26834"/>
-                <item value="54834"/>
-                <item value="81456"/>
-                <item value="82345"/>
-                <item value="83415"/>
-                <item value="83026"/>
-                <item value="80675"/>
-                <item value="82153"/>
-                <item value="85743"/>
-                <item value="92354"/>
-              </model>
+              <model/>
             </properties>
           </component>
-          <component id="e38b5" class="javax.swing.JList" binding="list2" default-binding="true">
+          <component id="e38b5" class="javax.swing.JList" binding="nameList">
             <constraints>
               <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="6" hsize-policy="2" anchor="0" fill="3" indent="0" use-parent-layout="false">
                 <preferred-size width="150" height="50"/>
               </grid>
             </constraints>
             <properties>
-              <model>
-                <item value="Luis1"/>
-                <item value="Luis2"/>
-                <item value="Luis3"/>
-                <item value="Luis4"/>
-                <item value="Luis5"/>
-                <item value="Luis6"/>
-                <item value="Luis7"/>
-                <item value="Luis8"/>
-                <item value="Luis9"/>
-                <item value="Luis10"/>
-                <item value="Luis11"/>
-                <item value="Luis12"/>
-                <item value="Luis13"/>
-                <item value="Luis14"/>
-                <item value="Luis15"/>
-                <item value="Luis16"/>
-              </model>
+              <model/>
             </properties>
           </component>
         </children>

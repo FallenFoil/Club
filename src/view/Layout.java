@@ -1,15 +1,16 @@
 package view;
 
 //// Imports que não deveriam de estar aqui////
+import model.Fee;
 import model.Member;
 ///////////////////////////////////////////////
 import model.ModelFacade;
 
+import java.time.LocalDate;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Classe defenida para criar um membro
@@ -29,11 +30,12 @@ public class Layout {
     private JTextField nameTF;
     private JTextField curseTF;
     private JButton feeBT;
-    private JButton refreshBT;
+    private JButton doneBT;
     private String member_name;
     private int ID;
-
-    public Layout(ModelFacade x, JList numberlist, JList namelist, List<JFrame> frames){
+    private Quotas fee;
+                            
+    public Layout(ModelFacade x, JList numberlist, JList namelist, List<JFrame> frames , List<Fee> tmp,int tmp_size){
         this.layout = new JFrame("Membro");
         layout.setSize(350,300);
         layout.setContentPane(this.layout_panel);
@@ -41,7 +43,7 @@ public class Layout {
         layout.setVisible(true);
         this.used = false;
 
-        refreshBT.addActionListener(new ActionListener() {
+        doneBT.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String str;
@@ -70,6 +72,8 @@ public class Layout {
                         namelist.setModel(nameModelo);
                         setUsed(true);
                         frames.add(layout);
+                        tmp.add(new Fee(10,LocalDate.now()));
+                        fee = new Quotas(tmp.get(tmp.size()-1)); //sempre que é criado cota para um aluno , é criado layout de cotas
                         layout.dispose();
                     } else {
                         JOptionPane.showMessageDialog(layout, "Digite um número de aluno válido, número atual já existente", "Erro de validação", JOptionPane.ERROR_MESSAGE);
@@ -94,6 +98,12 @@ public class Layout {
                 }
             }
 
+        });
+        feeBT.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                fee.getFrame().setVisible(true);
+                }
         });
     }
 

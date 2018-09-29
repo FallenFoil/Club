@@ -2,50 +2,52 @@ package model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class Fee implements Serializable {
     private double value;
-    private LocalDate payDay;
-    private LocalDate paidDay;
 
+    private Map<LocalDate,Boolean> payDay;
 
     public Fee(){
         this.value = 0.0;
-        this.payDay = null;
-        this.paidDay = null;
+        this.payDay = new HashMap<>();
     }
 
-    public Fee(double value, LocalDate payDay){
+    public Fee(double value, LocalDate today){
         this.value = value;
-        this.payDay = payDay;
-        this.paidDay = null;
+        this.payDay = new HashMap<>();
+        for(int i=0;i<13;i++){//adiciona 1 ano
+            LocalDate x = today.plusMonths(i);
+            this.payDay.put(x,false);
+        }
     }
 
     public double getValue(){
         return this.value;
     }
 
-    public LocalDate getPayDay(){
-        return this.payDay;
-    }
-
-    public LocalDate getPaidDay(){
-        return this.paidDay;
-    }
-
     public void setValue(double value){
         this.value = value;
     }
 
-    public void setPayDay(LocalDate payDay){
+    public Map<LocalDate, Boolean> getPayDay() {
+        return this.payDay;
+    }
+
+    public void setPayDay(Map<LocalDate, Boolean> payDay) {
         this.payDay = payDay;
     }
 
-    public void setPaidDay(LocalDate paidDay){
-        this.paidDay = paidDay;
-    }
-
     public Fee clone(){return this.clone();}
+
+    public String toString() {
+        return "Fee{" +
+                "value=" + value +
+                ", payDay=" + payDay +
+                '}';
+    }
 
 }
