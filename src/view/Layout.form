@@ -71,7 +71,7 @@
         <properties/>
         <border type="none"/>
         <children>
-          <component id="e4f19" class="javax.swing.JLabel" binding="number">
+          <component id="e4f19" class="javax.swing.JLabel" binding="numero">
             <constraints>
               <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -79,7 +79,7 @@
               <text value=" Número"/>
             </properties>
           </component>
-          <component id="49d01" class="javax.swing.JLabel" binding="name">
+          <component id="49d01" class="javax.swing.JLabel" binding="nome">
             <constraints>
               <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -87,7 +87,7 @@
               <text value=" Nome"/>
             </properties>
           </component>
-          <component id="b56c" class="javax.swing.JLabel" binding="year">
+          <component id="b56c" class="javax.swing.JLabel" binding="ano">
             <constraints>
               <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -95,7 +95,7 @@
               <text value=" Ano"/>
             </properties>
           </component>
-          <component id="6a35b" class="javax.swing.JLabel" binding="curse">
+          <component id="6a35b" class="javax.swing.JLabel" binding="curso">
             <constraints>
               <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>

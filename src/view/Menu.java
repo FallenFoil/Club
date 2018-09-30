@@ -1,5 +1,7 @@
 package view;
 
+import data.DataFacade;
+import model.Club;
 import model.Fee;
 import model.ModelFacade;
 //// Imports que não deveriam de estar aqui////
@@ -11,8 +13,10 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Menu {
+
     private ModelFacade cesium;
     private JPanel fstPN;
     private JButton secundaryBT;
@@ -25,9 +29,9 @@ public class Menu {
 
     public Menu(ModelFacade Cesium) {
 
-        this.cesium = Cesium;
         this.frames = new ArrayList<>();
         this.fees = new ArrayList<>();
+        this.cesium = Cesium;
 
         JFrame menu = new JFrame("App Cesium");
         menu.setContentPane(this.fstPN);
@@ -39,10 +43,18 @@ public class Menu {
 
         primaryButton();
 
+        DefaultListModel numberModelo = new DefaultListModel();
+        DefaultListModel nameModelo = new DefaultListModel();
+        for (Integer a : cesium.getInfo().keySet()) {
+            numberModelo.addElement(a);
+            nameModelo.addElement(cesium.getMemberName(a));
+        }
+
+        numberList.setModel(numberModelo);
+        nameList.setModel(nameModelo);
+
         WindowListener exitListener = exitL();
-
         mouseL();
-
         menu.addWindowListener(exitListener);
         menu.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         menu.pack();
@@ -54,8 +66,8 @@ public class Menu {
         this.primaryBT.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int tmp_size = fees.size();
-                Layout x = new Layout(cesium, numberList, nameList,frames,fees,tmp_size);
+
+                Layout x = new Layout(cesium, numberList, nameList,frames,fees);
             }
         });
     }
@@ -92,8 +104,8 @@ public class Menu {
                     @Override
                     public void actionPerformed(ActionEvent actionEvent){
                         int i=0;
-                        for(Member x : cesium.getInfo().keySet()){
-                            if(x.getID() == Integer.parseInt(txt.getText())){
+                        for(Integer a : cesium.getInfo().keySet()){
+                            if(a == Integer.parseInt(txt.getText())){
                                 frames.remove(i);
                             }
                             i++;
@@ -103,9 +115,9 @@ public class Menu {
                         if(cesium.removeMember(txt.getText())){
                             DefaultListModel numberModelo = new DefaultListModel();
                             DefaultListModel nameModelo = new DefaultListModel();
-                            for (Member cliente : cesium.getInfo().keySet()) {
-                                numberModelo.addElement(cliente.getID());
-                                nameModelo.addElement(cliente.getName());
+                            for (Integer  a : cesium.getInfo().keySet()) {
+                                numberModelo.addElement(a);
+                                nameModelo.addElement(cesium.getMemberName(a));
                             }
                             numberList.setModel(numberModelo);
                             nameList.setModel(nameModelo);
@@ -135,7 +147,10 @@ public class Menu {
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2) {
                     int index = nameList.locationToIndex(e.getPoint());
-                    frames.get(index).setVisible(true);
+
+                    //cria um Layout a partir de um determinado membro
+                    new Layout(cesium,numberList,nameList,cesium.getInfo().keySet().stream().collect(Collectors.toList()).get(index));
+
                 }
             }
         };

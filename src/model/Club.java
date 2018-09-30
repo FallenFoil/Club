@@ -18,7 +18,8 @@ public class Club implements ModelFacade, Serializable  {
 
 	private static Club ourInstance = new Club();
 
-	public static Club getInstance() {
+	public static Club getInstance()
+	{
 		return ourInstance;
 	}
 
@@ -30,7 +31,6 @@ public class Club implements ModelFacade, Serializable  {
 
 
 	//Variaveis e metodos de instancia
-
 	private Map<Member,List<Fee>> info;
 
 
@@ -53,16 +53,14 @@ public class Club implements ModelFacade, Serializable  {
 		}
 	}
 
-
 	//Getters!
+	public Map<Integer,List<Fee>> getInfo(){
 
-	public Map<Member,List<Fee>> getInfo(){
-
-		Map<Member,List<Fee>> result = new  LinkedHashMap<>();
+		Map<Integer,List<Fee>> result = new  LinkedHashMap<>();
 
 		for(Map.Entry<Member ,List<Fee>> entry : this.info.entrySet()){
 
-			result.put(entry.getKey(), entry.getValue());
+			result.put(entry.getKey().getID(), entry.getValue());
 		}
 		return result;
 	}
@@ -76,6 +74,32 @@ public class Club implements ModelFacade, Serializable  {
 		}
 	}
 
+	public String getMemberName(Integer x){
+		for(Member a : this.info.keySet()){
+			if(a.getID() == x){
+				return a.getName();
+			}
+		}
+		return "none";
+	}
+
+	public String getMemberYear(Integer x){
+		for(Member a : this.info.keySet()){
+			if(a.getID() == x){
+				return a.getAno();
+			}
+		}
+		return "none";
+	}
+
+	public String getMemberCurse(Integer x){
+		for(Member a : this.info.keySet()){
+			if(a.getID() == x){
+				return a.getCurso();
+			}
+		}
+		return "none";
+	}
 
 	public boolean equals(Object obj){
 
@@ -102,11 +126,21 @@ public class Club implements ModelFacade, Serializable  {
 		return sb.toString();
 	}
 
-	public boolean AddMember(int id, String nome) {
+	public void setMember(int id, String name,String curso,String ano){
+		for(Member x: this.info.keySet()){
+			if(x.getID() == id){
+				x.setName(name);
+				x.setAno(ano);
+				x.setCurso(curso);
+			}
+		}
+	}
+
+	public boolean AddMember(int id, String nome,String curso,String ano) {
 		for(Member m : this.info.keySet()){
 			if(m.getID() == id) return false;
 		}
-		this.info.put(new Member(nome, id), new ArrayList<>());
+		this.info.put(new Member(nome, id,curso,ano), new ArrayList<>());
 		return true;
 	}
 

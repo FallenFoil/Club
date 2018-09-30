@@ -17,7 +17,6 @@ public class Main /* implements Observer*/ {
     public static void main(String []args){
         Club.setInstance();
         c = Club.getInstance();
-
         try {
             for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
                 if ("GTK+".equals(info.getName())) {

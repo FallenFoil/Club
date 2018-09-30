@@ -1,6 +1,7 @@
 package view;
 
 //// Imports que não deveriam de estar aqui////
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import model.Fee;
 import model.Member;
 ///////////////////////////////////////////////
@@ -18,102 +19,149 @@ import java.util.List;
  */
 
 public class Layout {
-    private boolean used;//significa se o panel foi usado ou não
     private JPanel layout_panel;
     private JFrame layout;
-    private  JLabel number;
-    private  JLabel year;
-    private  JLabel name;
-    private  JLabel curse;
     private JTextField numberTF;
     private JTextField yearTF;
     private JTextField nameTF;
     private JTextField curseTF;
     private JButton feeBT;
     private JButton doneBT;
+    private JLabel numero;
+    private JLabel nome;
+    private JLabel ano;
+    private JLabel curso;
     private String member_name;
-    private int ID;
+    private String member_corse;
+    private String member_year;
+    private int member_ID;
     private Quotas fee;
-                            
-    public Layout(ModelFacade x, JList numberlist, JList namelist, List<JFrame> frames , List<Fee> tmp,int tmp_size){
+
+
+    public Layout(ModelFacade x, JList numberlist, JList namelist ,Integer membro) {
         this.layout = new JFrame("Membro");
-        layout.setSize(350,300);
+        layout.setSize(350, 300);
         layout.setContentPane(this.layout_panel);
         layout.setLocationRelativeTo(null);
         layout.setVisible(true);
-        this.used = false;
+
+        numberTF.setText(membro.toString());
+        nameTF.setText(x.getMemberName(membro));
+        yearTF.setText(x.getMemberYear(membro));
+        curseTF.setText(x.getMemberCurse(membro));
+
+
+        numberTF.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                member_ID = Integer.parseInt(numberTF.getText());
+                System.out.println("coisas");
+            }
+        });
+
+        nameTF.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                member_name = nameTF.getText();
+            }
+        });
+
+        yearTF.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                member_year = yearTF.getText();
+            }
+        });
+
+        curseTF.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                member_corse = (curseTF.getText());
+            }
+        });
 
         doneBT.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String str;
-                str = numberTF.getText();
-                int y = Integer.parseInt(str);
-                setId(y);
-
-                str = nameTF.getText();
-                setName(str);
-
-                String strCurse = curseTF.getText();
-
-                String strYear = yearTF.getText();
-
-
-                if (!used) {
-                    if (x.AddMember(ID, member_name)) {
-                        DefaultListModel numberModelo = new DefaultListModel();
-                        DefaultListModel nameModelo = new DefaultListModel();
-                        for (Member cliente : x.getInfo().keySet()) {
-                            numberModelo.addElement(cliente.getID());
-                            nameModelo.addElement(cliente.getName());
-                        }
-
-                        numberlist.setModel(numberModelo);
-                        namelist.setModel(nameModelo);
-                        setUsed(true);
-                        frames.add(layout);
-                        tmp.add(new Fee(10,LocalDate.now()));
-                        fee = new Quotas(tmp.get(tmp.size()-1)); //sempre que é criado cota para um aluno , é criado layout de cotas
-                        layout.dispose();
-                    } else {
-                        JOptionPane.showMessageDialog(layout, "Digite um número de aluno válido, número atual já existente", "Erro de validação", JOptionPane.ERROR_MESSAGE);
+                for (Integer a : x.getInfo().keySet()) {
+                    if (a == member_ID) {
+                        x.setMember(member_ID, member_name, member_corse, member_year);
                     }
-                }else{
-                    for(Member x : x.getInfo().keySet()){
-                        if(x.getID()==ID){
-                            x.setName(member_name);
-                        }
-                    }
+                }
 
+                DefaultListModel numberModelo = new DefaultListModel();
+                DefaultListModel nameModelo = new DefaultListModel();
+
+                for (Integer a : x.getInfo().keySet()) {
+                    numberModelo.addElement(a);
+                    nameModelo.addElement(x.getMemberName(a));
+                }
+
+                numberlist.setModel(numberModelo);
+                namelist.setModel(nameModelo);
+                layout.dispose();
+            }
+        });
+
+
+        feeBT.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    fee.getFrame().setVisible(true);
+                } catch (Exception e1) {
+                }
+            }
+        });
+    }
+
+    public Layout(ModelFacade x, JList numberlist, JList namelist, List<JFrame> frames , List<Fee> tmp) {
+        this.layout = new JFrame("Membro");
+        layout.setSize(350, 300);
+        layout.setContentPane(this.layout_panel);
+        layout.setLocationRelativeTo(null);
+        layout.setVisible(true);
+
+        doneBT.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                member_ID = Integer.parseInt(numberTF.getText());
+                member_name = nameTF.getText();
+                member_corse = curseTF.getText();
+                member_year = yearTF.getText();
+
+
+                if (x.AddMember(member_ID, member_name, member_corse, member_year)) {
                     DefaultListModel numberModelo = new DefaultListModel();
                     DefaultListModel nameModelo = new DefaultListModel();
-                    for (Member cliente : x.getInfo().keySet()) {
-                        numberModelo.addElement(cliente.getID());
-                        nameModelo.addElement(cliente.getName());
+                    for (Integer a : x.getInfo().keySet()) {
+                        numberModelo.addElement(a);
+                        nameModelo.addElement(x.getMemberName(a));
                     }
 
                     numberlist.setModel(numberModelo);
                     namelist.setModel(nameModelo);
+                    frames.add(layout);
+                    tmp.add(new Fee(10, LocalDate.now()));
+                    fee = new Quotas(tmp.get(tmp.size() - 1)); //sempre que é criado cota para um aluno , é criado layout de cotas
                     layout.dispose();
+                } else {
+                    JOptionPane.showMessageDialog(layout, "Digite um número de aluno válido, número atual já existente", "Erro de validação", JOptionPane.ERROR_MESSAGE);
                 }
+
             }
 
         });
         feeBT.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                fee.getFrame().setVisible(true);
+                try {
+                    fee.getFrame().setVisible(true);
+                } catch (Exception e1) {
                 }
+            }
         });
     }
-
-
-    public void setName(String x){
-        this.member_name = x;
-    }
-    public void setId(int x){
-        this.ID = x;
-    }
-    public void setUsed(Boolean x){this.used = x;}
 
 }

@@ -8,6 +8,7 @@ import java.util.Map;
 
 public class Fee implements Serializable {
     private double value;
+    private int id;
 
     private Map<LocalDate,Boolean> payDay;
 

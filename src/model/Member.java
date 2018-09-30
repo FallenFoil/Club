@@ -9,11 +9,10 @@ import java.time.LocalDate;
 
 public class Member implements Serializable{
 
-	//private List observers = new ArrayList<>();
-	//private boolean fee ;
 	private int ID;
 	private	String name;
-
+	private String curso;
+	private String ano;
 
 	public Member(){
 		//this.fee = false;
@@ -21,38 +20,40 @@ public class Member implements Serializable{
 		this.ID = 0;
 	}
 
-	public Member(String name,int id){
+	public Member(String name,int id,String curso,String ano){
 		this.name = name;
 		this.ID = id;
+		this.curso = curso;
+		this.ano = ano;
 	}
 
 	public Member(Member x){
 		this.name = x.getName();
 		this.ID = x.getID();
 	}
-	/*
-	public void setCotas(){
-		this.fee = true;
-		this.notifyObservers();
+	public void setID(int ID) {
+		this.ID = ID;
 	}
 
-	public void addObserver(Observer observer) {
-		observers.add(observer);
-	}
-	public void deleteObserver(Observer o){
-		observers.remove(o);
+	public String getCurso() {
+		return curso;
 	}
 
-	public void notifyObservers(Object arg){
-		for(Observer x : this.observers){
-			x.update(this.fee);
-		}
-	}*/
+	public void setCurso(String curso) {
+		this.curso = curso;
+	}
+
+	public String getAno() {
+		return ano;
+	}
+
+	public void setAno(String ano) {
+		this.ano = ano;
+	}
 
 	public String getName(){
 		return this.name;
 	}
-
 
 	public int getID(){
 		return this.ID;
