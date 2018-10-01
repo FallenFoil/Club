@@ -27,6 +27,7 @@ public class Menu {
 
         JScrollPane scrollPanel = new JScrollPane(lists);
         menu.getContentPane().add(scrollPanel);
+        numberList.setEnabled(false);
 
         secundaryButton();
 

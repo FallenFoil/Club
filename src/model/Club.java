@@ -167,4 +167,11 @@ public class Club implements ModelFacade, Serializable  {
             }
         }
     }
+
+    public boolean containsMemberID(Integer id){
+		for(Member m : this.info){
+			if(m.getID() == id) return true;
+		}
+		return false;
+	}
 }

@@ -36,6 +36,18 @@ public class Quotas {
                 }
             });
         }
+
+        JLabel blank = new JLabel("");
+        this.n.add(blank);
+        JButton doneBT = new JButton("Done");
+        this.n.add(doneBT);
+        doneBT.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e){
+                n.dispose();
+            }
+        });
+
     }
 
     public JFrame getFrame(){

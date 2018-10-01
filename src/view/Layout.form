@@ -2,7 +2,7 @@
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="view.Layout">
   <grid id="27dc6" binding="layout_panel" layout-manager="BorderLayout" hgap="0" vgap="0">
     <constraints>
-      <xy x="20" y="55" width="389" height="315"/>
+      <xy x="20" y="55" width="389" height="319"/>
     </constraints>
     <properties>
       <opaque value="true"/>
@@ -166,14 +166,6 @@
         <properties/>
         <border type="none"/>
         <children>
-          <component id="71ddb" class="javax.swing.JTextField" binding="numberTF">
-            <constraints>
-              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-                <preferred-size width="150" height="-1"/>
-              </grid>
-            </constraints>
-            <properties/>
-          </component>
           <component id="70850" class="javax.swing.JTextField" binding="nameTF">
             <constraints>
               <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
@@ -205,6 +197,14 @@
             <properties>
               <text value=""/>
             </properties>
+          </component>
+          <component id="237ec" class="javax.swing.JTextField" binding="numberTF">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="-1"/>
+              </grid>
+            </constraints>
+            <properties/>
           </component>
         </children>
       </grid>

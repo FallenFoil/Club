@@ -14,5 +14,6 @@ public interface ModelFacade {
     void setMemberFee(Integer id, Map<LocalDate, Boolean> payments);
     Map<LocalDate,Boolean> getMemberFee(Integer x);
     void setMember(int id, String name,String curso,String ano);
+    boolean containsMemberID(Integer id);
     void save();
 }

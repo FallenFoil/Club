@@ -3,9 +3,9 @@ import model.ModelFacade;
 import data.ClubDataManager;
 import model.Club;
 import view.Menu;
-import view.Quotas;
 
 import javax.swing.*;
+import java.awt.*;
 
 
 public class Main{
@@ -15,7 +15,7 @@ public class Main{
     public static void main(String []args){
         Club.setInstance();
         c = Club.getInstance();
-        System.out.println("ola");
+
         try {
             for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
                 if ("GTK+".equals(info.getName())) {
