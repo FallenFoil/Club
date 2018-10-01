@@ -50,43 +50,17 @@ public class Layout {
         yearTF.setText(x.getMemberYear(membro));
         curseTF.setText(x.getMemberCurse(membro));
 
-
-        numberTF.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                member_ID = Integer.parseInt(numberTF.getText());
-                System.out.println("coisas");
-            }
-        });
-
-        nameTF.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                member_name = nameTF.getText();
-            }
-        });
-
-        yearTF.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                member_year = yearTF.getText();
-            }
-        });
-
-        curseTF.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                member_corse = (curseTF.getText());
-            }
-        });
-
         doneBT.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                for (Integer a : x.getInfo().keySet()) {
-                    if (a == member_ID) {
-                        x.setMember(member_ID, member_name, member_corse, member_year);
-                    }
+                member_ID = Integer.parseInt(numberTF.getText());
+                member_name = nameTF.getText();
+                member_year = yearTF.getText();
+                member_corse = (curseTF.getText());
+
+                if (x.getInfo().containsKey(member_ID)) {
+                    x.setMember(member_ID, member_name, member_corse, member_year);
+
                 }
 
                 DefaultListModel numberModelo = new DefaultListModel();
@@ -115,7 +89,8 @@ public class Layout {
         });
     }
 
-    public Layout(ModelFacade x, JList numberlist, JList namelist, List<JFrame> frames , List<Fee> tmp) {
+
+    public Layout(ModelFacade x, JList numberlist, JList namelist , List<Fee> tmp) {
         this.layout = new JFrame("Membro");
         layout.setSize(350, 300);
         layout.setContentPane(this.layout_panel);
@@ -142,7 +117,6 @@ public class Layout {
 
                     numberlist.setModel(numberModelo);
                     namelist.setModel(nameModelo);
-                    frames.add(layout);
                     tmp.add(new Fee(10, LocalDate.now()));
                     fee = new Quotas(tmp.get(tmp.size() - 1)); //sempre que é criado cota para um aluno , é criado layout de cotas
                     layout.dispose();

@@ -24,12 +24,10 @@ public class Menu {
     private JList nameList;
     private JButton primaryBT;
     private JPanel lists;
-    private List<JFrame> frames ;
     private List<Fee> fees;
 
     public Menu(ModelFacade Cesium) {
 
-        this.frames = new ArrayList<>();
         this.fees = new ArrayList<>();
         this.cesium = Cesium;
 
@@ -67,7 +65,7 @@ public class Menu {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                Layout x = new Layout(cesium, numberList, nameList,frames,fees);
+                Layout x = new Layout(cesium, numberList, nameList,fees);
             }
         });
     }
@@ -103,14 +101,6 @@ public class Menu {
                 doneButton.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent actionEvent){
-                        int i=0;
-                        for(Integer a : cesium.getInfo().keySet()){
-                            if(a == Integer.parseInt(txt.getText())){
-                                frames.remove(i);
-                            }
-                            i++;
-                        }
-                        i=0;
 
                         if(cesium.removeMember(txt.getText())){
                             DefaultListModel numberModelo = new DefaultListModel();
