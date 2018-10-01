@@ -1,5 +1,6 @@
 package model;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
@@ -11,6 +12,7 @@ public interface ModelFacade {
     String getMemberYear(Integer x);
     String getMemberCurse(Integer x);
     //void setFee(int idMember, int idFee);
+    Map<LocalDate,Boolean> getMemberFee(Integer x);
     void setMember(int id, String name,String curso,String ano);
     void save();
 }

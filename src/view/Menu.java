@@ -1,18 +1,10 @@
 package view;
 
-import data.DataFacade;
-import model.Club;
-import model.Fee;
-import model.ModelFacade;
-//// Imports que não deveriam de estar aqui////
-import model.Member;
-///////////////////////////////////////////////
 
+import model.ModelFacade;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.*;
-import java.util.List;
 import java.util.stream.Collectors;
 
 public class Menu {
@@ -24,11 +16,10 @@ public class Menu {
     private JList nameList;
     private JButton primaryBT;
     private JPanel lists;
-    private List<Fee> fees;
+
 
     public Menu(ModelFacade Cesium) {
 
-        this.fees = new ArrayList<>();
         this.cesium = Cesium;
 
         JFrame menu = new JFrame("App Cesium");
@@ -65,7 +56,7 @@ public class Menu {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                Layout x = new Layout(cesium, numberList, nameList,fees);
+                Layout x = new Layout(cesium, numberList, nameList);
             }
         });
     }

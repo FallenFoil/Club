@@ -13,9 +13,10 @@ public class Member implements Serializable{
 	private	String name;
 	private String curso;
 	private String ano;
+	private Fee x;
 
 	public Member(){
-		//this.fee = false;
+		this.x = new Fee(25,LocalDate.now());
 		this.name = "n/a";
 		this.ID = 0;
 	}
@@ -33,6 +34,14 @@ public class Member implements Serializable{
 	}
 	public void setID(int ID) {
 		this.ID = ID;
+	}
+
+	public Fee getFee() {
+		return x;
+	}
+
+	public void setFee(Fee x) {
+		this.x = x;
 	}
 
 	public String getCurso() {

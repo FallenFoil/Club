@@ -15,7 +15,7 @@ public class Quotas {
     private List<JTextField> x;
     private JFrame n;
 
-    public Quotas(model.Fee f) {
+    public Quotas(Map<LocalDate,Boolean> tmp) {
         this.x = new ArrayList<>();
         this.n = new JFrame("Quotas");
         JPanel fee = new JPanel();
@@ -23,7 +23,7 @@ public class Quotas {
         this.n.setSize(300, 300);
 
 
-        for (Map.Entry<LocalDate,Boolean> now : f.getPayDay().entrySet()) {
+        for (Map.Entry<LocalDate,Boolean> now : tmp.entrySet()) {
             //aceder ao LocalDate -> now.getKey
             //aceder ao Boolean -> now.getValue
             JTextField m = new JTextField();

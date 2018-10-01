@@ -20,7 +20,7 @@ public class Fee implements Serializable {
     public Fee(double value, LocalDate today){
         this.value = value;
         this.payDay = new HashMap<>();
-        for(int i=0;i<13;i++){//adiciona 1 ano
+        for(int i=1;i<12;i++){//adiciona 1 ano
             LocalDate x = today.plusMonths(i);
             this.payDay.put(x,false);
         }

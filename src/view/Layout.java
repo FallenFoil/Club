@@ -1,17 +1,9 @@
 package view;
 
-//// Imports que não deveriam de estar aqui////
-import com.sun.org.apache.xpath.internal.operations.Mod;
-import model.Fee;
-import model.Member;
-///////////////////////////////////////////////
 import model.ModelFacade;
-
-import java.time.LocalDate;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
 
 /**
  * Classe defenida para criar um membro
@@ -90,7 +82,7 @@ public class Layout {
     }
 
 
-    public Layout(ModelFacade x, JList numberlist, JList namelist , List<Fee> tmp) {
+    public Layout(ModelFacade x, JList numberlist, JList namelist ) {
         this.layout = new JFrame("Membro");
         layout.setSize(350, 300);
         layout.setContentPane(this.layout_panel);
@@ -117,8 +109,7 @@ public class Layout {
 
                     numberlist.setModel(numberModelo);
                     namelist.setModel(nameModelo);
-                    tmp.add(new Fee(10, LocalDate.now()));
-                    fee = new Quotas(tmp.get(tmp.size() - 1)); //sempre que é criado cota para um aluno , é criado layout de cotas
+                    fee = new Quotas(x.getMemberFee(member_ID));
                     layout.dispose();
                 } else {
                     JOptionPane.showMessageDialog(layout, "Digite um número de aluno válido, número atual já existente", "Erro de validação", JOptionPane.ERROR_MESSAGE);

@@ -4,7 +4,9 @@ package model;
 import data.DataFacade;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Club implements ModelFacade, Serializable  {
 
@@ -142,6 +144,15 @@ public class Club implements ModelFacade, Serializable  {
 		}
 		this.info.put(new Member(nome, id,curso,ano), new ArrayList<>());
 		return true;
+	}
+
+	public Map<LocalDate,Boolean> getMemberFee(Integer x){
+		for(Member m : 	this.info.keySet()){
+			if(m.getID() == x){
+				return m.getFee().getPayDay();
+			}
+		}
+		return new HashMap<>();
 	}
 
 	public boolean removeMember(String x){
