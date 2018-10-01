@@ -15,6 +15,10 @@ public class Fee implements Serializable {
     public Fee(){
         this.value = 0.0;
         this.payDay = new HashMap<>();
+        for(int i=1;i<12;i++){//adiciona 1 ano
+            LocalDate x = LocalDate.now().plusMonths(i);
+            this.payDay.put(x,false);
+        }
     }
 
     public Fee(double value, LocalDate today){
@@ -39,7 +43,7 @@ public class Fee implements Serializable {
     }
 
     public void setPayDay(Map<LocalDate, Boolean> payDay) {
-        this.payDay = payDay;
+        this.payDay = new HashMap<>(payDay);
     }
 
     public Fee clone(){return this.clone();}

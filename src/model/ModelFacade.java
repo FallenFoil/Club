@@ -7,11 +7,11 @@ import java.util.Map;
 public interface ModelFacade {
     boolean AddMember(int id, String nome,String curso,String ano);
     boolean removeMember(String x);
-    Map<Integer, List<Fee>> getInfo();
+    List<Integer> getInfo();
     String getMemberName(Integer x);
     String getMemberYear(Integer x);
     String getMemberCurse(Integer x);
-    //void setFee(int idMember, int idFee);
+    void setMemberFee(Integer id, Map<LocalDate, Boolean> payments);
     Map<LocalDate,Boolean> getMemberFee(Integer x);
     void setMember(int id, String name,String curso,String ano);
     void save();

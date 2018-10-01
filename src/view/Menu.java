@@ -34,7 +34,7 @@ public class Menu {
 
         DefaultListModel numberModelo = new DefaultListModel();
         DefaultListModel nameModelo = new DefaultListModel();
-        for (Integer a : cesium.getInfo().keySet()) {
+        for (Integer a : cesium.getInfo()) {
             numberModelo.addElement(a);
             nameModelo.addElement(cesium.getMemberName(a));
         }
@@ -96,7 +96,7 @@ public class Menu {
                         if(cesium.removeMember(txt.getText())){
                             DefaultListModel numberModelo = new DefaultListModel();
                             DefaultListModel nameModelo = new DefaultListModel();
-                            for (Integer  a : cesium.getInfo().keySet()) {
+                            for (Integer  a : cesium.getInfo()) {
                                 numberModelo.addElement(a);
                                 nameModelo.addElement(cesium.getMemberName(a));
                             }
@@ -130,7 +130,7 @@ public class Menu {
                     int index = nameList.locationToIndex(e.getPoint());
 
                     //cria um Layout a partir de um determinado membro
-                    new Layout(cesium,numberList,nameList,cesium.getInfo().keySet().stream().collect(Collectors.toList()).get(index));
+                    new Layout(cesium,numberList,nameList,cesium.getInfo().get(index));
 
                 }
             }

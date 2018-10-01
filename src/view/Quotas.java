@@ -1,49 +1,41 @@
 package view;
 
+import model.ModelFacade;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
 
 public class Quotas {
-
-    private List<JTextField> x;
     private JFrame n;
 
-    public Quotas(Map<LocalDate,Boolean> tmp) {
-        this.x = new ArrayList<>();
+    public Quotas(ModelFacade x, int memberID, boolean b){
         this.n = new JFrame("Quotas");
-        JPanel fee = new JPanel();
+        this.n.setLayout(new GridLayout(13,2));
         this.n.setResizable(true);
         this.n.setSize(300, 300);
+        this.n.setLocationRelativeTo(null);
+        this.n.setVisible(b);
 
+        Map<LocalDate, Boolean> payments = new HashMap<>(x.getMemberFee(memberID));
 
-        for (Map.Entry<LocalDate,Boolean> now : tmp.entrySet()) {
-            //aceder ao LocalDate -> now.getKey
-            //aceder ao Boolean -> now.getValue
-            JTextField m = new JTextField();
-            fee.add(m);
-            m.setText(now.getKey().toString() + " --- Pago : " + now.getValue());
-
-            m.addActionListener(new ActionListener() {
+        for (Map.Entry<LocalDate,Boolean> now : payments.entrySet()){
+            JLabel data = new JLabel(now.getKey().toString());
+            this.n.add(data);
+            JCheckBox paid = new JCheckBox("Pago", now.getValue());
+            this.n.add(paid);
+            paid.addActionListener(new ActionListener() {
                 @Override
-                public void actionPerformed(ActionEvent e) {
-                    String x = m.getText();
-                    Scanner s = new Scanner(x);
-                    String bool = "";
-                    while(s.next() != ":");
-                    bool = s.next();
-                    System.out.println(bool);
-
+                public void actionPerformed(ActionEvent e){
+                    payments.put(now.getKey(), !now.getValue());
+                    x.setMemberFee(memberID, payments);
                 }
             });
         }
-        this.n.add(fee);
     }
 
     public JFrame getFrame(){

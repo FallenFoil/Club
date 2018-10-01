@@ -1,22 +1,21 @@
-import view.Menu;
 import data.DataFacade;
 import model.ModelFacade;
 import data.ClubDataManager;
 import model.Club;
+import view.Menu;
+import view.Quotas;
 
 import javax.swing.*;
-import java.util.Observable;
-import java.util.Observer;
 
 
-public class Main /* implements Observer*/ {
-    //Inicializacao dos facades
+public class Main{
     private static DataFacade df = new ClubDataManager();
     private static ModelFacade c = new Club(df);
 
     public static void main(String []args){
         Club.setInstance();
         c = Club.getInstance();
+        System.out.println("ola");
         try {
             for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
                 if ("GTK+".equals(info.getName())) {
@@ -31,10 +30,4 @@ public class Main /* implements Observer*/ {
 
         new Menu(c);
     }
-
-    /* Hipotese a considerar, NAO IMPLEMENTADA MESMO RETIRANDO O COMENTARIO
-    public void update(Observable ob, Object o){
-        Main.df.saveData(c, "test.dss");
-    }
-    */
 }

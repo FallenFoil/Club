@@ -50,7 +50,7 @@ public class Layout {
                 member_year = yearTF.getText();
                 member_corse = (curseTF.getText());
 
-                if (x.getInfo().containsKey(member_ID)) {
+                if (x.getInfo().contains(member_ID)) {
                     x.setMember(member_ID, member_name, member_corse, member_year);
 
                 }
@@ -58,7 +58,7 @@ public class Layout {
                 DefaultListModel numberModelo = new DefaultListModel();
                 DefaultListModel nameModelo = new DefaultListModel();
 
-                for (Integer a : x.getInfo().keySet()) {
+                for (Integer a : x.getInfo()) {
                     numberModelo.addElement(a);
                     nameModelo.addElement(x.getMemberName(a));
                 }
@@ -73,10 +73,7 @@ public class Layout {
         feeBT.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                try {
-                    fee.getFrame().setVisible(true);
-                } catch (Exception e1) {
-                }
+                fee = new Quotas(x, membro, true);
             }
         });
     }
@@ -102,30 +99,20 @@ public class Layout {
                 if (x.AddMember(member_ID, member_name, member_corse, member_year)) {
                     DefaultListModel numberModelo = new DefaultListModel();
                     DefaultListModel nameModelo = new DefaultListModel();
-                    for (Integer a : x.getInfo().keySet()) {
+                    for (Integer a : x.getInfo()) {
                         numberModelo.addElement(a);
                         nameModelo.addElement(x.getMemberName(a));
                     }
 
                     numberlist.setModel(numberModelo);
                     namelist.setModel(nameModelo);
-                    fee = new Quotas(x.getMemberFee(member_ID));
+                    fee = new Quotas(x, member_ID, false);
                     layout.dispose();
                 } else {
                     JOptionPane.showMessageDialog(layout, "Digite um número de aluno válido, número atual já existente", "Erro de validação", JOptionPane.ERROR_MESSAGE);
                 }
-
             }
 
-        });
-        feeBT.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    fee.getFrame().setVisible(true);
-                } catch (Exception e1) {
-                }
-            }
         });
     }
 

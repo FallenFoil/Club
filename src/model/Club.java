@@ -33,15 +33,11 @@ public class Club implements ModelFacade, Serializable  {
 
 
 	//Variaveis e metodos de instancia
-	private Map<Member,List<Fee>> info;
+	private List<Member> info;
 
 
 	public Club() {
-		this.info = new  LinkedHashMap<>();
-	}
-
-	public Club(Map<Member,List<Fee>> x){
-		setInfo(x);
+		this.info = new ArrayList<>();
 	}
 
 	public Club(DataFacade df){
@@ -56,28 +52,26 @@ public class Club implements ModelFacade, Serializable  {
 	}
 
 	//Getters!
-	public Map<Integer,List<Fee>> getInfo(){
+	public List<Integer> getInfo(){
+		List<Integer> result = new ArrayList<>();
 
-		Map<Integer,List<Fee>> result = new  LinkedHashMap<>();
-
-		for(Map.Entry<Member ,List<Fee>> entry : this.info.entrySet()){
-
-			result.put(entry.getKey().getID(), entry.getValue());
-		}
-		return result;
+		for(Member m : this.info){
+		    result.add(m.getID());
+        }
+	    return result;
 	}
 
 
 	//Setters!
-	public void setInfo(Map<Member,List<Fee>> x){
-		this.info = new LinkedHashMap<>();
-		for(Map.Entry<Member,List<Fee>> entry : x.entrySet()){
-			this.info.put(entry.getKey(), entry.getValue());
+	public void setInfo(List<Member> x){
+		this.info = new ArrayList<>();
+		for(Member m : x){
+			this.info.add(m);
 		}
 	}
 
 	public String getMemberName(Integer x){
-		for(Member a : this.info.keySet()){
+		for(Member a : this.info){
 			if(a.getID() == x){
 				return a.getName();
 			}
@@ -86,7 +80,7 @@ public class Club implements ModelFacade, Serializable  {
 	}
 
 	public String getMemberYear(Integer x){
-		for(Member a : this.info.keySet()){
+		for(Member a : this.info){
 			if(a.getID() == x){
 				return a.getAno();
 			}
@@ -95,7 +89,7 @@ public class Club implements ModelFacade, Serializable  {
 	}
 
 	public String getMemberCurse(Integer x){
-		for(Member a : this.info.keySet()){
+		for(Member a : this.info){
 			if(a.getID() == x){
 				return a.getCurso();
 			}
@@ -129,7 +123,7 @@ public class Club implements ModelFacade, Serializable  {
 	}
 
 	public void setMember(int id, String name,String curso,String ano){
-		for(Member x: this.info.keySet()){
+		for(Member x: this.info){
 			if(x.getID() == id){
 				x.setName(name);
 				x.setAno(ano);
@@ -139,15 +133,15 @@ public class Club implements ModelFacade, Serializable  {
 	}
 
 	public boolean AddMember(int id, String nome,String curso,String ano) {
-		for(Member m : this.info.keySet()){
+		for(Member m : this.info){
 			if(m.getID() == id) return false;
 		}
-		this.info.put(new Member(nome, id,curso,ano), new ArrayList<>());
+		this.info.add(new Member(nome, id,curso,ano));
 		return true;
 	}
 
 	public Map<LocalDate,Boolean> getMemberFee(Integer x){
-		for(Member m : 	this.info.keySet()){
+		for(Member m : 	this.info){
 			if(m.getID() == x){
 				return m.getFee().getPayDay();
 			}
@@ -156,7 +150,7 @@ public class Club implements ModelFacade, Serializable  {
 	}
 
 	public boolean removeMember(String x){
-		for(Member a : this.info.keySet()){
+		for(Member a : this.info){
 			if(a.getID() ==  Integer.parseInt(x)){
 				this.info.remove(a);
 				return true;
@@ -164,4 +158,13 @@ public class Club implements ModelFacade, Serializable  {
 		}
 		return false;
 	}
+
+	public void setMemberFee(Integer x, Map<LocalDate, Boolean> payments){
+        for(Member m : 	this.info){
+            if(m.getID() == x){
+                m.getFee().setPayDay(payments);
+
+            }
+        }
+    }
 }

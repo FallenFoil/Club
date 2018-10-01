@@ -26,11 +26,13 @@ public class Member implements Serializable{
 		this.ID = id;
 		this.curso = curso;
 		this.ano = ano;
+		this.x = new Fee();
 	}
 
 	public Member(Member x){
 		this.name = x.getName();
 		this.ID = x.getID();
+		this.x = new Fee();
 	}
 	public void setID(int ID) {
 		this.ID = ID;
