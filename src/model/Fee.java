@@ -3,6 +3,7 @@ package model;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 
@@ -14,19 +15,27 @@ public class Fee implements Serializable {
 
     public Fee(){
         this.value = 0.0;
-        this.payDay = new HashMap<>();
-        for(int i=1;i<12;i++){//adiciona 1 ano
-            LocalDate x = LocalDate.now().plusMonths(i);
+        this.payDay = new LinkedHashMap<>();
+        LocalDate x = LocalDate.now();
+        x.withDayOfMonth(1);
+
+        for(int i=1;i<13;i++){//adiciona 1 ano
+            x = x.withMonth(i);
             this.payDay.put(x,false);
+
         }
     }
 
     public Fee(double value, LocalDate today){
         this.value = value;
-        this.payDay = new HashMap<>();
-        for(int i=1;i<12;i++){//adiciona 1 ano
-            LocalDate x = today.plusMonths(i);
+        this.payDay = new LinkedHashMap<>();
+        LocalDate x = LocalDate.now();
+        x = x.withDayOfMonth(1);
+
+        for(int i=1;i<13;i++){//adiciona 1 ano
+            x = x.withMonth(i);
             this.payDay.put(x,false);
+
         }
     }
 
@@ -43,7 +52,7 @@ public class Fee implements Serializable {
     }
 
     public void setPayDay(Map<LocalDate, Boolean> payDay) {
-        this.payDay = new HashMap<>(payDay);
+        this.payDay = new LinkedHashMap<>(payDay);
     }
 
     public Fee clone(){return this.clone();}
